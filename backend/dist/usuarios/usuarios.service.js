@@ -30,11 +30,19 @@ let UsuariosService = class UsuariosService {
         return usuarios;
     }
     async findByNombre(nombreUsuario) {
-        const usuario = await this.usuarioRepository.createQueryBuilder("usuario").where("usuario.nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario }).getOne();
+        const usuario = await this.usuarioRepository.findOne({
+            where: {
+                nombreUsuario: nombreUsuario
+            }
+        });
         return usuario;
     }
     async findByEmail(correo) {
-        const usuario = await this.usuarioRepository.createQueryBuilder("usuario").where("usuario.correo = :correo", { correo: correo }).getOne();
+        const usuario = await this.usuarioRepository.findOne({
+            where: {
+                correo: correo
+            }
+        });
         if (!usuario) {
             throw new common_1.NotFoundException({ message: 'No hay usuario' });
         }
@@ -54,7 +62,6 @@ let UsuariosService = class UsuariosService {
     }
     async create(data) {
         const exists = await this.findByNombre(data.nombreUsuario);
-        console.log(data.contraseña);
         if (exists)
             throw new common_1.BadRequestException({ message: 'Ese usuario ya existe' });
         const contraseñaHash = await bcrypt.hash(data.contraseña, 10);
@@ -78,26 +85,22 @@ let UsuariosService = class UsuariosService {
         if (data.correo) {
             usuario.correo = data.correo;
         }
-        await this.usuarioRepository.createQueryBuilder()
-            .update(usuarios_entity_1.UsuariosEntity)
-            .set({
+        await this.usuarioRepository.update({
+            nombreUsuario: nombreUsuario
+        }, {
             nombreUsuario: usuario.nombreUsuario,
             contraseña: usuario.contraseña,
             correo: usuario.correo
-        })
-            .where("nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario })
-            .execute();
+        });
         return { message: 'usuario modificado' };
     }
     async delete(nombreUsuario) {
         const usuario = await this.findByNombre(nombreUsuario);
         if (!usuario)
             throw new common_1.BadRequestException({ message: 'Ese usuario no existe' });
-        await this.usuarioRepository.createQueryBuilder()
-            .delete()
-            .from(usuarios_entity_1.UsuariosEntity)
-            .where("nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario })
-            .execute();
+        await this.usuarioRepository.delete({
+            nombreUsuario: nombreUsuario
+        });
         return { message: 'usuario eliminado' };
     }
 };
