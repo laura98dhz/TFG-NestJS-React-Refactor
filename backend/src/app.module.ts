@@ -43,7 +43,7 @@ import { MailsModule } from './mails/mails.module';
     ImagenesModule,
     MailsModule,
   ],
-  controllers: [AppController, ImagenesController, MailsController],
-  providers: [AppService, ImagenesService, MailsService],
+  controllers: [AppController, MailsController],
+  providers: [AppService, MailsService],
 })
 export class AppModule { }

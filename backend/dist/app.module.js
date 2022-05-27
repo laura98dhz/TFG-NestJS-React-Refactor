@@ -14,8 +14,6 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const usuarios_module_1 = require("./usuarios/usuarios.module");
 const inmuebles_module_1 = require("./inmuebles/inmuebles.module");
-const imagenes_controller_1 = require("./imagenes/imagenes.controller");
-const imagenes_service_1 = require("./imagenes/imagenes.service");
 const imagenes_module_1 = require("./imagenes/imagenes.module");
 const mails_controller_1 = require("./mails/mails.controller");
 const mails_service_1 = require("./mails/mails.service");
@@ -51,8 +49,8 @@ AppModule = __decorate([
             imagenes_module_1.ImagenesModule,
             mails_module_1.MailsModule,
         ],
-        controllers: [app_controller_1.AppController, imagenes_controller_1.ImagenesController, mails_controller_1.MailsController],
-        providers: [app_service_1.AppService, imagenes_service_1.ImagenesService, mails_service_1.MailsService],
+        controllers: [app_controller_1.AppController, mails_controller_1.MailsController],
+        providers: [app_service_1.AppService, mails_service_1.MailsService],
     })
 ], AppModule);
 exports.AppModule = AppModule;
