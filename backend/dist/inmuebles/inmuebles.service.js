@@ -25,9 +25,12 @@ let InmueblesService = class InmueblesService {
         this.inmuebleRepository = inmuebleRepository;
         this.usuarioRepository = usuarioRepository;
     }
-    async findAll() {
-        const usuarios = await this.inmuebleRepository.createQueryBuilder("inmueble").getMany();
-        return usuarios;
+    async findAll(limit, skip) {
+        const inmueble = await this.inmuebleRepository.find({
+            take: limit,
+            skip: skip
+        });
+        return inmueble;
     }
     async findById(id) {
         const inmueble = await this.inmuebleRepository.findOne({
@@ -37,14 +40,16 @@ let InmueblesService = class InmueblesService {
         });
         return inmueble;
     }
-    async findByUsuario(nombreUsuario) {
+    async findByUsuario(limit, skip, nombreUsuario) {
         const usuario = await (0, typeorm_2.getRepository)('UsuariosEntity').createQueryBuilder("usuario").where("usuario.nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario }).getOne();
         if (!usuario)
             throw new common_1.BadRequestException({ message: 'Ese usuario no existe' });
         const inmueble = this.inmuebleRepository.find({
             where: {
                 vendedor: nombreUsuario
-            }
+            },
+            take: limit,
+            skip: skip
         });
         return inmueble;
     }
@@ -110,11 +115,13 @@ let InmueblesService = class InmueblesService {
         }
         return inmueble;
     }
-    async findByUbicacion(ubicacion) {
+    async findByUbicacion(limit, skip, ubicacion) {
         const inmueble = this.inmuebleRepository.find({
             where: {
                 ubicacion: ubicacion
             },
+            take: limit,
+            skip: skip
         });
         return inmueble;
     }

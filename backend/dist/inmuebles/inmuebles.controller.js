@@ -21,8 +21,8 @@ let InmueblesController = class InmueblesController {
     constructor(inmueblesService) {
         this.inmueblesService = inmueblesService;
     }
-    findAll() {
-        return this.inmueblesService.findAll();
+    findAll(limit, skip) {
+        return this.inmueblesService.findAll(limit, skip);
     }
     filterByTipo(tipoInmueble) {
         return this.inmueblesService.filterByTipo(tipoInmueble);
@@ -39,14 +39,14 @@ let InmueblesController = class InmueblesController {
     filterBySuperficie(superficie) {
         return this.inmueblesService.filterBySuperficie(superficie);
     }
-    findByUsuario(usuario) {
-        return this.inmueblesService.findByUsuario(usuario);
+    findByUsuario(limit, skip, usuario) {
+        return this.inmueblesService.findByUsuario(limit, skip, usuario);
     }
     findById(id) {
         return this.inmueblesService.findById(id);
     }
-    findByUbicacion(ubicacion) {
-        return this.inmueblesService.findByUbicacion(ubicacion);
+    findByUbicacion(limit, skip, ubicacion) {
+        return this.inmueblesService.findByUbicacion(limit, skip, ubicacion);
     }
     create(vendedor, data) {
         return this.inmueblesService.create(vendedor, data);
@@ -59,10 +59,12 @@ let InmueblesController = class InmueblesController {
     }
 };
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('/getAll'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    __param(0, (0, common_1.Query)('limit')),
+    __param(1, (0, common_1.Query)('skip')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", void 0)
 ], InmueblesController.prototype, "findAll", null);
 __decorate([
@@ -108,9 +110,11 @@ __decorate([
 __decorate([
     (0, common_1.Get)('/mostrar/:usuario'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    __param(0, (0, common_1.Param)('usuario')),
+    __param(0, (0, common_1.Query)('limit')),
+    __param(1, (0, common_1.Query)('skip')),
+    __param(2, (0, common_1.Param)('usuario')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number, Number, String]),
     __metadata("design:returntype", void 0)
 ], InmueblesController.prototype, "findByUsuario", null);
 __decorate([
@@ -124,9 +128,11 @@ __decorate([
 __decorate([
     (0, common_1.Get)(':ubicacion'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    __param(0, (0, common_1.Param)('ubicacion')),
+    __param(0, (0, common_1.Query)('limit')),
+    __param(1, (0, common_1.Query)('skip')),
+    __param(2, (0, common_1.Param)('ubicacion')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number, Number, String]),
     __metadata("design:returntype", void 0)
 ], InmueblesController.prototype, "findByUbicacion", null);
 __decorate([

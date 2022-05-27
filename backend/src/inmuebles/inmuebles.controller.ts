@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe, HttpStatus, HttpCode, UsePipes, ValidationPipe, UseInterceptors, UploadedFile, UploadedFiles } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe, HttpStatus, HttpCode, UsePipes, ValidationPipe, UseInterceptors, UploadedFile, UploadedFiles, Query } from '@nestjs/common';
 import { InmueblesService } from './inmuebles.service';
 import { CreateInmuebleDto } from './dto/create-inmueble.dto';
 import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
@@ -10,10 +10,10 @@ export class InmueblesController {
   
   constructor(private readonly inmueblesService: InmueblesService) {}
 
-  @Get()
+  @Get('/getAll')
   @HttpCode(HttpStatus.OK)
-  findAll() {
-    return this.inmueblesService.findAll();
+  findAll(@Query('limit') limit: number, @Query('skip') skip: number) {
+    return this.inmueblesService.findAll(limit, skip);
   }
 
   @Get('/tipoInmueble')
@@ -48,8 +48,8 @@ export class InmueblesController {
   
   @Get('/mostrar/:usuario')
   @HttpCode(HttpStatus.OK)
-  findByUsuario(@Param('usuario') usuario: string) {
-    return this.inmueblesService.findByUsuario(usuario);
+  findByUsuario(@Query('limit') limit: number, @Query('skip') skip: number, @Param('usuario') usuario: string) {
+    return this.inmueblesService.findByUsuario(limit, skip, usuario);
   }
 
   @Get('/id/:id')
@@ -60,8 +60,8 @@ export class InmueblesController {
 
   @Get(':ubicacion')
   @HttpCode(HttpStatus.OK)
-  findByUbicacion(@Param('ubicacion') ubicacion: string) {
-    return this.inmueblesService.findByUbicacion(ubicacion);
+  findByUbicacion(@Query('limit') limit: number, @Query('skip') skip: number, @Param('ubicacion') ubicacion: string) {
+    return this.inmueblesService.findByUbicacion(limit, skip, ubicacion);
   }
 
   @UsePipes(new ValidationPipe({whitelist:true}))

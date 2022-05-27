@@ -18,9 +18,14 @@ export class InmueblesService {
         @InjectRepository(UsuariosEntity) private usuarioRepository: UsuariosRepository
     ) { }
 
-    async findAll(): Promise<any> {
-        const usuarios = await this.inmuebleRepository.createQueryBuilder("inmueble").getMany();
-        return usuarios;
+    async findAll(limit: number, skip: number): Promise<any> {
+        
+        const inmueble = await this.inmuebleRepository.find({
+            take:limit,
+            skip:skip
+        });
+        
+        return inmueble;
     }
 
     async findById(id: number): Promise<any> {
@@ -32,7 +37,7 @@ export class InmueblesService {
         return inmueble;
     }
 
-    async findByUsuario(nombreUsuario: string): Promise<any> {
+    async findByUsuario(limit: number, skip: number, nombreUsuario: string): Promise<any> {
         
         const usuario = await getRepository('UsuariosEntity').createQueryBuilder("usuario").where("usuario.nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario }).getOne();
         
@@ -41,9 +46,10 @@ export class InmueblesService {
         const inmueble = this.inmuebleRepository.find({
             where: {
                 vendedor: nombreUsuario
-            }
+            },
+            take:limit,
+            skip:skip
         });
-
         return inmueble;
     }
 
@@ -120,12 +126,13 @@ export class InmueblesService {
         return inmueble;
     }
     
-    async findByUbicacion(ubicacion: string): Promise<any> {
+    async findByUbicacion(limit: number, skip: number, ubicacion: string): Promise<any> {
         const inmueble = this.inmuebleRepository.find({
             where: {
                 ubicacion: ubicacion
             },
-
+            take:limit,
+            skip:skip
         });        
         return inmueble;
     }
