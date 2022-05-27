@@ -15,16 +15,50 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImagenesService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const fs_1 = require("fs");
+const path_1 = require("path");
 const inmuebles_entity_1 = require("../inmuebles/entities/inmuebles.entity");
 const inmuebles_repository_1 = require("../inmuebles/inmuebles.repository");
 const imagenes_entity_1 = require("./entities/imagenes.entity");
 const imagenes_repository_1 = require("./imagenes.repository");
 let ImagenesService = class ImagenesService {
-    constructor(usuarioRepository, inmuebleRepository) {
-        this.usuarioRepository = usuarioRepository;
+    constructor(imagenesRepository, inmuebleRepository) {
+        this.imagenesRepository = imagenesRepository;
         this.inmuebleRepository = inmuebleRepository;
     }
     async uploadFiles(id, files) {
+        const inmueble = this.inmuebleRepository.findOne({
+            where: {
+                id: id
+            }
+        });
+        if (!inmueble)
+            throw new common_1.BadRequestException({ message: 'Ese inmueble no existe' });
+        for (var file of files) {
+            const filename = file.filename;
+            const path = file.path;
+            const img = this.imagenesRepository.create({ filename, path });
+            console.log(file);
+            img.inmueble = await this.inmuebleRepository.findOne({
+                where: {
+                    id: id
+                }
+            });
+            await this.imagenesRepository.save(img);
+        }
+        return { message: 'Imágenes subidas' };
+    }
+    async getPath(id) {
+        const files = await this.imagenesRepository.find({
+            where: {
+                inmueble: id,
+            }
+        });
+        return files;
+    }
+    async getFile(path, res) {
+        const img = (0, fs_1.createReadStream)((0, path_1.join)(process.cwd(), path.path));
+        img.pipe(res);
     }
 };
 ImagenesService = __decorate([

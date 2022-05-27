@@ -22,8 +22,14 @@ let ImagenesController = class ImagenesController {
     constructor(imagenesService) {
         this.imagenesService = imagenesService;
     }
-    uploadFiles(id, files) {
-        this.imagenesService.uploadFiles(id, files);
+    async uploadFiles(id, files) {
+        return await this.imagenesService.uploadFiles(id, files);
+    }
+    async getPaths(id) {
+        return await this.imagenesService.getPath(id);
+    }
+    async getFile(path, res) {
+        return await this.imagenesService.getFile(path, res);
     }
 };
 __decorate([
@@ -31,6 +37,7 @@ __decorate([
     (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('files', 5, {
         storage: (0, multer_1.diskStorage)({
             destination: './upload',
+            filename: imagenes_helper_1.renameImage
         }),
         fileFilter: imagenes_helper_1.fileFilter
     })),
@@ -38,8 +45,23 @@ __decorate([
     __param(1, (0, common_1.UploadedFiles)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Array]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ImagenesController.prototype, "uploadFiles", null);
+__decorate([
+    (0, common_1.Get)('/getPaths/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], ImagenesController.prototype, "getPaths", null);
+__decorate([
+    (0, common_1.Get)('/getImage'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], ImagenesController.prototype, "getFile", null);
 ImagenesController = __decorate([
     (0, common_1.Controller)('imagenes'),
     __metadata("design:paramtypes", [imagenes_service_1.ImagenesService])

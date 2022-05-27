@@ -10,11 +10,14 @@ export class ImagenesEntity {
     @Column({type: 'varchar', nullable: false})
     filename: string;
 
+    @Column({type: 'varchar', nullable: false})
+    path: string;
+
     @ManyToOne(() => InmueblesEntity, (inmuebleEntity) => inmuebleEntity.id, {
         onDelete: "CASCADE",
         onUpdate: "CASCADE"
     })
-    @JoinColumn({name: "inmueble_id"})
-    inmueble_id: number
+    @JoinColumn({name: "inmueble"})
+    inmueble: InmueblesEntity
 
 }

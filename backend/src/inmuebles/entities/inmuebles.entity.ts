@@ -39,6 +39,6 @@ export class InmueblesEntity {
     @Column({type: 'varchar', length: 15, nullable: false})
     descripcion: string;
 
-    @OneToMany(() => ImagenesEntity, (imagenesEntity) => imagenesEntity.inmueble_id)
-    imagenes: ImagenesEntity[]; 
+    @OneToMany(() => ImagenesEntity, (imagenesEntity) => imagenesEntity.inmueble)
+    imagenes: Array<ImagenesEntity>; 
 }

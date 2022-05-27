@@ -66,7 +66,6 @@ export class InmueblesController {
 
   @UsePipes(new ValidationPipe({whitelist:true}))
   @Post('/:vendedor')
-  @UseInterceptors(FilesInterceptor ('files'))
   @HttpCode(HttpStatus.CREATED)
   create(@Param('vendedor') vendedor: string, @Body() data: CreateInmuebleDto) {
     return this.inmueblesService.create(vendedor, data);

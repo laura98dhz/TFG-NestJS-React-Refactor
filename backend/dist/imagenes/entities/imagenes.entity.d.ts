@@ -1,5 +1,7 @@
+import { InmueblesEntity } from "../../inmuebles/entities/inmuebles.entity";
 export declare class ImagenesEntity {
     id: number;
     filename: string;
-    inmueble_id: number;
+    path: string;
+    inmueble: InmueblesEntity;
 }

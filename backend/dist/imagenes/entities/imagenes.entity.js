@@ -23,13 +23,17 @@ __decorate([
     __metadata("design:type", String)
 ], ImagenesEntity.prototype, "filename", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', nullable: false }),
+    __metadata("design:type", String)
+], ImagenesEntity.prototype, "path", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => inmuebles_entity_1.InmueblesEntity, (inmuebleEntity) => inmuebleEntity.id, {
         onDelete: "CASCADE",
         onUpdate: "CASCADE"
     }),
-    (0, typeorm_1.JoinColumn)({ name: "inmueble_id" }),
-    __metadata("design:type", Number)
-], ImagenesEntity.prototype, "inmueble_id", void 0);
+    (0, typeorm_1.JoinColumn)({ name: "inmueble" }),
+    __metadata("design:type", inmuebles_entity_1.InmueblesEntity)
+], ImagenesEntity.prototype, "inmueble", void 0);
 ImagenesEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'Imagenes' })
 ], ImagenesEntity);

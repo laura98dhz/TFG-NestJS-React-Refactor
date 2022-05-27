@@ -11,5 +11,5 @@ export declare class InmueblesEntity {
     baños: number;
     precio: number;
     descripcion: string;
-    imagenes: ImagenesEntity[];
+    imagenes: Array<ImagenesEntity>;
 }

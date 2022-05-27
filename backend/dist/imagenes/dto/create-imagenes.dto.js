@@ -9,14 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateInmuebleDto = void 0;
+exports.CreateImagenesDto = void 0;
 const class_validator_1 = require("class-validator");
-class CreateInmuebleDto {
+class CreateImagenesDto {
 }
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateInmuebleDto.prototype, "filename", void 0);
-exports.CreateInmuebleDto = CreateInmuebleDto;
+], CreateImagenesDto.prototype, "filename", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateImagenesDto.prototype, "path", void 0);
+exports.CreateImagenesDto = CreateImagenesDto;
 //# sourceMappingURL=create-imagenes.dto.js.map

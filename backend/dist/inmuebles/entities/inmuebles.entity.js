@@ -60,7 +60,7 @@ __decorate([
     __metadata("design:type", String)
 ], InmueblesEntity.prototype, "descripcion", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => imagenes_entity_1.ImagenesEntity, (imagenesEntity) => imagenesEntity.inmueble_id),
+    (0, typeorm_1.OneToMany)(() => imagenes_entity_1.ImagenesEntity, (imagenesEntity) => imagenesEntity.inmueble),
     __metadata("design:type", Array)
 ], InmueblesEntity.prototype, "imagenes", void 0);
 InmueblesEntity = __decorate([

@@ -1,10 +1,14 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsString } from "class-validator";
 
-export class CreateInmuebleDto {
+export class CreateImagenesDto {
     
     
     @IsNotEmpty()
     @IsString()
     filename: string;
+
+    @IsNotEmpty()
+    @IsString()
+    path: string;
 
 }

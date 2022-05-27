@@ -1,3 +1,4 @@
-export declare class CreateInmuebleDto {
+export declare class CreateImagenesDto {
     filename: string;
+    path: string;
 }

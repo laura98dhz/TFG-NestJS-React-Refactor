@@ -17,7 +17,6 @@ const common_1 = require("@nestjs/common");
 const inmuebles_service_1 = require("./inmuebles.service");
 const create_inmueble_dto_1 = require("./dto/create-inmueble.dto");
 const update_inmueble_dto_1 = require("./dto/update-inmueble.dto");
-const platform_express_1 = require("@nestjs/platform-express");
 let InmueblesController = class InmueblesController {
     constructor(inmueblesService) {
         this.inmueblesService = inmueblesService;
@@ -133,7 +132,6 @@ __decorate([
 __decorate([
     (0, common_1.UsePipes)(new common_1.ValidationPipe({ whitelist: true })),
     (0, common_1.Post)('/:vendedor'),
-    (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('files')),
     (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
     __param(0, (0, common_1.Param)('vendedor')),
     __param(1, (0, common_1.Body)()),
