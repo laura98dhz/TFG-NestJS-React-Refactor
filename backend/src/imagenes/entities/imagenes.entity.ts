@@ -8,18 +8,13 @@ export class ImagenesEntity {
     id: number;
 
     @Column({type: 'varchar', nullable: false})
-    nombre: string;
+    filename: string;
 
-    @Column({type: 'varchar', nullable: false})
-    tipo: string;
-
-    @Column({type: "longblob", nullable: false})
-    data: string;
-
-    @ManyToOne(() => InmueblesEntity, (inmueblesEntity) => inmueblesEntity.id, {
+    @ManyToOne(() => InmueblesEntity, (inmuebleEntity) => inmuebleEntity.id, {
         onDelete: "CASCADE",
         onUpdate: "CASCADE"
     })
-    @JoinColumn({ name: 'inmueble_id' })
-    inmueble_id: InmueblesEntity;
+    @JoinColumn({name: "inmueble_id"})
+    inmueble_id: number
+
 }

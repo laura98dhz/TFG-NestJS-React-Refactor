@@ -9,10 +9,10 @@ export class ImagenesController {
     constructor(private readonly imagenesService: ImagenesService) {}
 
     @Post('upload')
-    @UseInterceptors(FilesInterceptor('file', 5, {
+    @UseInterceptors(FilesInterceptor('files', 5, {
         storage: diskStorage({
             destination: './upload',
-            filename: renameImage
+            //filename: renameImage
         }),
         fileFilter: fileFilter
     }))

@@ -21,22 +21,14 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', nullable: false }),
     __metadata("design:type", String)
-], ImagenesEntity.prototype, "nombre", void 0);
+], ImagenesEntity.prototype, "filename", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', nullable: false }),
-    __metadata("design:type", String)
-], ImagenesEntity.prototype, "tipo", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: "longblob", nullable: false }),
-    __metadata("design:type", String)
-], ImagenesEntity.prototype, "data", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => inmuebles_entity_1.InmueblesEntity, (inmueblesEntity) => inmueblesEntity.id, {
+    (0, typeorm_1.ManyToOne)(() => inmuebles_entity_1.InmueblesEntity, (inmuebleEntity) => inmuebleEntity.id, {
         onDelete: "CASCADE",
         onUpdate: "CASCADE"
     }),
-    (0, typeorm_1.JoinColumn)({ name: 'inmueble_id' }),
-    __metadata("design:type", inmuebles_entity_1.InmueblesEntity)
+    (0, typeorm_1.JoinColumn)({ name: "inmueble_id" }),
+    __metadata("design:type", Number)
 ], ImagenesEntity.prototype, "inmueble_id", void 0);
 ImagenesEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'Imagenes' })

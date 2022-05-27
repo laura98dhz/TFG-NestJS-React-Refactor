@@ -28,10 +28,9 @@ let ImagenesController = class ImagenesController {
 };
 __decorate([
     (0, common_1.Post)('upload'),
-    (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('file', 5, {
+    (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('files', 5, {
         storage: (0, multer_1.diskStorage)({
             destination: './upload',
-            filename: imagenes_helper_1.renameImage
         }),
         fileFilter: imagenes_helper_1.fileFilter
     })),
