@@ -8,3 +8,10 @@ export const renameImage = (req, file, callback)=>{
 
     callback(null, `${name}-${randomName}${fileName}`);
 }
+
+export const fileFilter = (req, file, callback) => {
+    if(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)){
+        return callback (new Error('Invalid format type'), false);
+    }
+    callback(null, true);
+}

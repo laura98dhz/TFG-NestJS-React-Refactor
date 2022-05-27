@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.renameImage = void 0;
+exports.fileFilter = exports.renameImage = void 0;
 const renameImage = (req, file, callback) => {
     const name = file.originalname.split('.')[0];
     const fileName = file.originalname;
@@ -11,4 +11,11 @@ const renameImage = (req, file, callback) => {
     callback(null, `${name}-${randomName}${fileName}`);
 };
 exports.renameImage = renameImage;
+const fileFilter = (req, file, callback) => {
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+        return callback(new Error('Invalid format type'), false);
+    }
+    callback(null, true);
+};
+exports.fileFilter = fileFilter;
 //# sourceMappingURL=imagenes.helper.js.map

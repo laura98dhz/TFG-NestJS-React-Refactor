@@ -1,7 +1,7 @@
 import { Controller, Post, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { renameImage } from './helpers/imagenes.helper';
+import { fileFilter, renameImage } from './helpers/imagenes.helper';
 import { ImagenesService } from './imagenes.service';
 
 @Controller('imagenes')
@@ -13,7 +13,8 @@ export class ImagenesController {
         storage: diskStorage({
             destination: './upload',
             filename: renameImage
-        })
+        }),
+        fileFilter: fileFilter
     }))
     uploadFiles(@UploadedFiles() files: Array<Express.Multer.File>){
         console.log(files)

@@ -32,7 +32,8 @@ __decorate([
         storage: (0, multer_1.diskStorage)({
             destination: './upload',
             filename: imagenes_helper_1.renameImage
-        })
+        }),
+        fileFilter: imagenes_helper_1.fileFilter
     })),
     __param(0, (0, common_1.UploadedFiles)()),
     __metadata("design:type", Function),
