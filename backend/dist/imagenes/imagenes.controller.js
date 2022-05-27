@@ -22,21 +22,22 @@ let ImagenesController = class ImagenesController {
     constructor(imagenesService) {
         this.imagenesService = imagenesService;
     }
-    uploadFiles(files) {
-        console.log(files);
+    uploadFiles(id, files) {
+        this.imagenesService.uploadFiles(id, files);
     }
 };
 __decorate([
-    (0, common_1.Post)('upload'),
+    (0, common_1.Post)('upload/:id'),
     (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('files', 5, {
         storage: (0, multer_1.diskStorage)({
             destination: './upload',
         }),
         fileFilter: imagenes_helper_1.fileFilter
     })),
-    __param(0, (0, common_1.UploadedFiles)()),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.UploadedFiles)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Array]),
+    __metadata("design:paramtypes", [Number, Array]),
     __metadata("design:returntype", void 0)
 ], ImagenesController.prototype, "uploadFiles", null);
 ImagenesController = __decorate([

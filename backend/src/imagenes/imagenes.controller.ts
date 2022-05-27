@@ -1,4 +1,4 @@
-import { Controller, Post, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { Controller, Param, Post, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { fileFilter, renameImage } from './helpers/imagenes.helper';
@@ -8,7 +8,7 @@ import { ImagenesService } from './imagenes.service';
 export class ImagenesController {
     constructor(private readonly imagenesService: ImagenesService) {}
 
-    @Post('upload')
+    @Post('upload/:id')
     @UseInterceptors(FilesInterceptor('files', 5, {
         storage: diskStorage({
             destination: './upload',
@@ -16,7 +16,7 @@ export class ImagenesController {
         }),
         fileFilter: fileFilter
     }))
-    uploadFiles(@UploadedFiles() files: Array<Express.Multer.File>){
-        console.log(files)
+    uploadFiles(@Param('id') id: number, @UploadedFiles() files: Array<Express.Multer.File>){
+        this.imagenesService.uploadFiles(id, files);
     }
 }
