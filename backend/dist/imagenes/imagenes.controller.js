@@ -16,6 +16,7 @@ exports.ImagenesController = void 0;
 const common_1 = require("@nestjs/common");
 const platform_express_1 = require("@nestjs/platform-express");
 const multer_1 = require("multer");
+const imagenes_helper_1 = require("./helpers/imagenes.helper");
 const imagenes_service_1 = require("./imagenes.service");
 let ImagenesController = class ImagenesController {
     constructor(imagenesService) {
@@ -30,6 +31,7 @@ __decorate([
     (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('file', 5, {
         storage: (0, multer_1.diskStorage)({
             destination: './upload',
+            filename: imagenes_helper_1.renameImage
         })
     })),
     __param(0, (0, common_1.UploadedFiles)()),
