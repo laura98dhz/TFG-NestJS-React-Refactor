@@ -1,0 +1,45 @@
+.piso{
+    
+    &--container{
+        display: flex;
+        border: 1px solid rgb(220, 220, 220);
+        box-shadow: 2px 2px rgb(220, 220, 220);
+        width: 100%;
+        height: 25rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    &--foto{
+        width: 25%;
+        height: 100%;
+        background-color: black;
+    }
+    &--detalles{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+        padding-left: 6rem;
+        width: 100%;
+
+        &--precio{
+            padding-bottom: 2rem;
+            font-weight: 900;
+        }
+
+        &--ubicacion{
+            padding-bottom: 2rem;
+        }
+
+        &--otrosDetalles{
+            display: flex;
+            
+            &>p{
+                margin-right: 2rem;    
+            }
+        }
+        &--descripcion{
+            margin-top: 2rem;
+        }
+    }
+}

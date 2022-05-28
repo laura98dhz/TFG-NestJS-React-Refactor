@@ -1,0 +1,131 @@
+.footer{
+    background-color: rgb(70, 70, 70);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5rem;
+    color: white;
+    
+    &-container{
+        display: flex;
+        flex-direction: column; 
+        width: 35%;
+        justify-content: space-between;
+    }
+    &-titulo{
+        color: white;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    &-form{
+        display: flex;
+        flex-direction: column;
+        &>input{
+            color: white;
+            margin-bottom: 2rem;
+            border:none;
+            border-radius: 2px;
+            padding: 1rem;
+            outline: none;
+            background-color: transparent;
+            border-bottom: 1px solid white;
+            &::placeholder{
+                color: white;
+            }            
+        }
+        &>button{
+            color: rgb(70, 70, 70);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin: 0 auto;
+            margin-top: 2rem;
+            width: 25%;
+            height: 3rem;
+            border: .5px rgb(241, 241, 241) solid;
+            background-color: white;
+            border-radius:2px ;
+            cursor: pointer;
+            transition: all ease .5s;
+
+            &:hover{
+                background-color: rgb(176, 158, 128);
+                color: white;
+            }
+        }
+    }
+    &-redes-sociales{
+
+        &-container{
+           width: 20%;
+           padding-left: 1rem;
+           display: flex;
+           flex-direction: column; 
+        }
+        &-titulo{
+            display: flex;
+            justify-content: center;
+        }
+        &-lista{
+            
+            list-style: none;
+            &>li{
+                margin-top: 2rem;
+                cursor: pointer;
+
+                &>span{
+                    visibility: hidden;
+                    opacity:0;
+                    transition:visibility .5s linear,opacity .5s linear;
+                }
+                &:hover>i{
+                    transform: scale(1.3);
+                }
+                &:hover>span{
+                    visibility: visible;
+                    opacity:1;
+                }
+                &>i{
+                    margin-right: 2rem ;
+                }
+            }
+        }
+    }
+    &-ubicacion{
+        &-container{
+            width: 30%;
+            display: flex;
+            flex-direction: column; 
+            padding-left: 1rem;
+
+        }
+        &-titulo{
+            display: flex;
+            justify-content: center;
+        }
+        &-lista{
+            padding-left: 3rem;
+            list-style: none;
+            
+            &>li{
+                margin-top: 2rem;
+                &:hover{
+                    &>i{
+                        transform: scale(1.3);
+                    }
+                }
+
+                &>i{
+                    margin-right: 2rem ;
+                    transition: all ease 1s;
+
+                    
+                }
+                &:last-child{
+                    margin-top: 4rem;
+                    margin-left: 3rem;
+                }
+                
+            }
+        }
+    }
+    
+}

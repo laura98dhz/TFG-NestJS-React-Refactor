@@ -1,0 +1,109 @@
+.main-principal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vH;
+    overflow: hidden;
+
+    background-image: linear-gradient(to right bottom, rgba(255,255,255,.5) , rgba(255,255,255,.5)), url('../../Recursos/img/fondoPaginaPrincipal.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    padding: 2rem;
+    margin: 0 auto;
+
+    &-container{
+        display: flex;
+        flex-direction: column;
+        width: 85%;
+        height: 85%;
+        background-color: rgba(255, 255, 255,.7);
+        
+        &-logo{
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            height: 50%;
+
+            &-img{
+                width: 40%;
+                height: auto;
+                text-align: center;
+            }
+        }
+        &-buscar{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;   
+
+            &-titulo{
+                display: flex;
+                justify-content: center;
+                margin-bottom: 4rem;   
+            }
+            &-form{
+                display: flex;
+                justify-content: center;
+                height: 5rem;
+                
+                &-botones{
+                    margin-right: 3rem;
+                    &--1,&--2{
+                        color: rgb(70, 70, 70);
+                        background-color: white;
+                        font-family: Verdana, Geneva, Tahoma, sans-serif;
+                        border: .5px rgb(241, 241, 241) solid;
+                        height: 5rem;
+                        padding: 1.5rem;
+                        border-radius: 2px;
+                        cursor: pointer;
+                        transition: all ease .5s;
+
+                        &:hover{
+                            background-color: rgb(176, 158, 128);
+                            color: white;
+                        }
+                    }
+                }
+                &-select{
+                    color: rgb(70, 70, 70);
+                    font-family: Verdana, Geneva, Tahoma, sans-serif;
+                    margin-right: 3rem;
+                    padding: 1rem;
+                    border: .5px rgb(241, 241, 241) solid;
+                    border-radius: 2px;
+                    transition: all ease .5s;
+                    outline: none;
+                    cursor: pointer;
+                    
+                }
+                &-text{
+                    color: rgb(70, 70, 70);
+                    font-family: Verdana, Geneva, Tahoma, sans-serif;
+                    width: 50%;
+                    font-size: 2.5rem;
+                    border: .5px rgb(241, 241, 241) solid;
+                    border-radius: 2px;
+                    outline: none;
+                    padding-left: 1rem;
+
+                    &-boton{
+                        position: relative;
+                        left: -4rem;
+                        width: 4rem;
+                        text-align: center;
+                        background-color: white;
+                        border: none;
+                        border-left:1px solid rgb(241, 241, 241);
+                        padding-left: 0rem;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}
