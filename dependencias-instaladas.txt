@@ -1,0 +1,10 @@
+LIBRERIAS USADAS EN NESTJS =>
+-node mailer
+-typeORM
+-class validator
+-class-transformer
+-@nestjs/core
+-@nestjs/swagger
+-bcryptjs
+-mysql2
+-multer
