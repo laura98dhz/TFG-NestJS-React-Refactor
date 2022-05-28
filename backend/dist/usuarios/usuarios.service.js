@@ -35,6 +35,8 @@ let UsuariosService = class UsuariosService {
                 nombreUsuario: nombreUsuario
             }
         });
+        if (!usuario)
+            throw new common_1.NotFoundException({ message: 'Usuario Incorrecto' });
         return usuario;
     }
     async findByEmail(correo) {

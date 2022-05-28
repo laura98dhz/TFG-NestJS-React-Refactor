@@ -28,7 +28,7 @@ function Pisos(props){
 
     }else if(props.ubicacion === "" && cont=== 0){
 
-        fetch("http://localhost:8080/inmuebles", { 
+        fetch("http://localhost:8080/inmuebles/getAll", { 
             'method': 'GET',
             'headers': { 'Content-Type': 'application/json' },    
         }).then(result => {

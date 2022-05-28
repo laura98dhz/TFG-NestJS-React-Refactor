@@ -93,13 +93,19 @@ function App() {
   }
 
   function cargarPonerAnuncio(){
-    setCargarCrearInmueble(true);
+
     setCargarHeader(false);
     setCargarMain(false);
     setCargarPisos(false);
     setCargarFooter(false);
     setCargarEditarInmueble(false);
     setCargarAjustesUsuario(false);
+    
+    if(sessionStorage.getItem('usuario') !== null){
+      setCargarCrearInmueble(true);
+    }else{
+      setCargarAcceder(true);
+    }
   }
   
   //Guardar datos
@@ -112,13 +118,11 @@ function App() {
     setUbicacion(ubicacion);
   }
 
-  function usuarioCorrecto(usuario){
+  function usuarioCorrecto(){
     setCargarAcceder(false);
     setCargarHeader(true);
     setCargarMain(true);
     setCargarFooter(true);
-    sessionStorage.setItem('usuario', usuario.nombreUsuario)
-    sessionStorage.setItem('correo', usuario.correo)
   }
 
   function editarInmueble(id){
@@ -129,18 +133,16 @@ function App() {
     setId(id);
   }
 
-  // console.log(sessionStorage.getItem('usuario'))
-  // console.log(cargarCrearInmueble)
+  console.log("app>>>",sessionStorage.getItem('usuario'))
   return (
     <>
-      { cargarHeader ? <Header handleOnClick={mostrarMain} accederOnClick={mostrarAcceder} usuario={sessionStorage.getItem('usuario')} ajustesOnClick={ajustesUsuario} handleCargarAnuncio={cargarPonerAnuncio}/> : "" }
+      { cargarHeader ? <Header handleOnClick={mostrarMain} accederOnClick={mostrarAcceder} ajustesOnClick={ajustesUsuario} handleCargarAnuncio={cargarPonerAnuncio}/> : "" }
       { cargarAcceder ? <Acceder cerrarOnCLick={cerrarAcceder} usuarioOnClick={usuarioCorrecto} crearUsuarioOnClick={cargarRegistroUsuario}/> : "" }
       { cargarMain ? <MainPrincipal handleOnClick={mostrarInmuebles} opcionOnClick={selectOpcionTransaccion} ubicacionOnClick={ubicacionElegida}/> : "" } 
       { cargarPisos ? <Pisos ubicacion={ubicacion} opcion={opcionElegida}/> : "" }
       { cargarAjustesUsuario ? <AjustesUsuario cerrarAjustes={cerrarAjustesUsuario} handleEditar={editarInmueble}/> : "" }
       { cargarFooter ? <Footer/> : "" }
       { cargarRegistro ? <Registro cargarRegistro={cargarRegistroUsuario} cerrarRegistro={mostrarMain}/> : "" }
-      {/* { <CrearInmueble cerrarOnCLick={cerrarAcceder}/> } */}
       { sessionStorage.getItem('usuario') && cargarCrearInmueble ? <CrearInmueble cerrarOnCLick={cerrarAcceder}/> : "" } 
       { cargarEditarInmueble ? <EditarInmueble id={id} cerrarOnCLick={cerrarEditarInmueble}/> : "" } 
     </>

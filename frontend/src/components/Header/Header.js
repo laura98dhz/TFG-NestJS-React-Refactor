@@ -21,6 +21,9 @@ function Header(props){
         props.handleCargarAnuncio();
     }
 
+    console.log("header>>>",sessionStorage.getItem('usuario'))
+
+
     return(
         <header className='header'>
             <img src={logo} className='logo' onClick={()=>cargarMain()}/>
@@ -31,7 +34,7 @@ function Header(props){
                         <p onClick={()=>ponerAnuncio()}>Pon tu anuncio gratis</p>
                     </button>       
                 </div>
-                {props.usuario === null ? (
+                {sessionStorage.getItem('usuario') === null ? (
                     <div className='usuario' onClick={()=>cargarAcceder()}>
                         <i class="fa-solid fa-user usuario-icono"></i>
                         <p>Acceder</p>
@@ -39,7 +42,7 @@ function Header(props){
                 ) : (
                     <div className='usuario'>
                         <i class="fa-solid fa-user usuario-icono"></i>
-                        <p onClick={()=>miUsuario()}>{props.usuario}</p>
+                        <p onClick={()=>miUsuario()}>{sessionStorage.getItem('usuario')}</p>
                     </div>
                 )}
                 

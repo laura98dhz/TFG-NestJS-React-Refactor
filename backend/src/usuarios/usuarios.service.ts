@@ -30,6 +30,8 @@ export class UsuariosService {
                 nombreUsuario: nombreUsuario
             }
         });
+        if(!usuario) throw new NotFoundException({ message: 'Usuario Incorrecto' });
+
         return usuario;
     }
 
@@ -52,12 +54,12 @@ export class UsuariosService {
                 nombreUsuario: usser.nombreUsuario,
             }
         });
-        
+
         if (!usuario) {
             throw new NotFoundException({ message: 'No hay usuario' })
         }
         const isMatch = await bcrypt.compare(usser.contraseña, usuario.contraseña);
-
+        
         return isMatch;
     }
 

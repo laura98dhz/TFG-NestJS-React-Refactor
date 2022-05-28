@@ -29,22 +29,6 @@ function Acceder (props){
         }else{
             contraseñaContainer.current.style.border = "";
         }
-
-        fetch("http://localhost:8080/usuarios/password", { 
-            'method': 'POST',
-            'headers': { 'Content-Type': 'application/json' },  
-            'body': JSON.stringify({
-                'nombreUsuario': usuario.current.value,
-                'contraseña': contraseña.current.value
-            })   
-        }).then( result => {
-            return result.json();
-        }).then( usuario => {
-            setBuscarUsuario(usuario);
-        }).then( () => {
-            setMensajeError("")
-        })
-        .catch(setMensajeError("Ese Usuario No Existe"));
         
         fetch("http://localhost:8080/usuarios/" + usuario.current.value, { 
             'method': 'GET',
@@ -52,19 +36,32 @@ function Acceder (props){
         }).then( result => {
             return result.json();
         }).then( usuario => {
-            console.log("Acceder dentro fech>>>",usuario)
             setNombreUsuario(usuario);
-        }).then( () => {
-            setMensajeError("")
         })
-        .catch(setMensajeError("Ese Usuario No Existe"));
 
+        if(nombreUsuario.message===undefined){
+            fetch("http://localhost:8080/usuarios/password", { 
+                'method': 'POST',
+                'headers': { 'Content-Type': 'application/json' },  
+                'body': JSON.stringify({
+                    'nombreUsuario': usuario.current.value,
+                    'contraseña': contraseña.current.value
+                })   
+            }).then( result => {
+                return result.json();
+            }).then( usuario => {
+                setBuscarUsuario(usuario);
+            })
+    }
     }
 
-
-    if(buscarUsuario){
-        props.usuarioOnClick(nombreUsuario);
+    if(buscarUsuario===true){
+        props.usuarioOnClick();
+        sessionStorage.setItem('usuario', nombreUsuario.nombreUsuario)
+        sessionStorage.setItem('correo', nombreUsuario.correo)
     }
+
+    console.log("acceder>>>",sessionStorage.getItem('usuario'))
 
     function registrarUsuario(){
         props.crearUsuarioOnClick();
