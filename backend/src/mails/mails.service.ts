@@ -7,6 +7,7 @@ export class MailsService {
     constructor(private mailerService: MailerService) {}
 
     async sendMailWelcome(email: string, name: string) {
+        console.log(email, name)
         await this.mailerService.sendMail({
             to: email,
             subject: 'Creacion Usuario Golden Houses',
@@ -14,15 +15,18 @@ export class MailsService {
             context: {
                 name: name,
             },
-            // attachments: [{
-            //     filename: 'logo.png',
-            //     path: __dirname + '/templates/logo.png',
-            //     cid: 'logo'
-            // }]
+            attachments: [{
+                filename: 'logo.png',
+                path: __dirname + '/templates/logo.png',
+                cid: 'logo'
+            }]
         })
     }
 
-    async sendMailPassword(email: string, name: string, password: string) {
+    async sendMailPassword(email: string, name: string) {
+        
+        const password = 1;
+
         await this.mailerService.sendMail({
             to: email,
             subject: 'Recuperar Contraseña Golden Houses',
@@ -31,11 +35,11 @@ export class MailsService {
                 name: name,
                 password: password
             },
-            // attachments: [{
-            //     filename: 'logo.png',
-            //     path: __dirname + '/templates/logo.png',
-            //     cid: 'logo'
-            // }]
+            attachments: [{
+                filename: 'logo.png',
+                path: __dirname + '/templates/logo.png',
+                cid: 'logo'
+            }]
         })
     }
 }

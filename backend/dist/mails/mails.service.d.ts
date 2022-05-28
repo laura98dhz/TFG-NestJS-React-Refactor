@@ -3,5 +3,5 @@ export declare class MailsService {
     private mailerService;
     constructor(mailerService: MailerService);
     sendMailWelcome(email: string, name: string): Promise<void>;
-    sendMailPassword(email: string, name: string, password: string): Promise<void>;
+    sendMailPassword(email: string, name: string): Promise<void>;
 }

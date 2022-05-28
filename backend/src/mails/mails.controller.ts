@@ -6,13 +6,13 @@ export class MailsController {
     
     constructor(private readonly mailsService: MailsService) {}
 
-    @Post('welcome')
-    async sendEmailWelcome(@Query() email: any, @Query() name: any) {        
-        return await this.mailsService.sendMailWelcome(email.email, name.name);
+    @Post('/welcome')
+    async sendEmailWelcome(@Query('email') email: string, @Query('name') name: string) {        
+        return await this.mailsService.sendMailWelcome(email, name);
     }
 
-    @Post('send')
-    async sendEmailPassword(@Query() email: any, @Query() name: any, @Query() password: any) {        
-        return await this.mailsService.sendMailPassword(email.email, name.name, password.password);
+    @Post('/send')
+    async sendEmailPassword(@Query('email') email: string, @Query('name') name: string) {        
+        return await this.mailsService.sendMailPassword(email, name);
     } 
 }

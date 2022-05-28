@@ -20,27 +20,26 @@ let MailsController = class MailsController {
         this.mailsService = mailsService;
     }
     async sendEmailWelcome(email, name) {
-        return await this.mailsService.sendMailWelcome(email.email, name.name);
+        return await this.mailsService.sendMailWelcome(email, name);
     }
-    async sendEmailPassword(email, name, password) {
-        return await this.mailsService.sendMailPassword(email.email, name.name, password.password);
+    async sendEmailPassword(email, name) {
+        return await this.mailsService.sendMailPassword(email, name);
     }
 };
 __decorate([
-    (0, common_1.Post)('welcome'),
-    __param(0, (0, common_1.Query)()),
-    __param(1, (0, common_1.Query)()),
+    (0, common_1.Post)('/welcome'),
+    __param(0, (0, common_1.Query)('email')),
+    __param(1, (0, common_1.Query)('name')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], MailsController.prototype, "sendEmailWelcome", null);
 __decorate([
-    (0, common_1.Post)('send'),
-    __param(0, (0, common_1.Query)()),
-    __param(1, (0, common_1.Query)()),
-    __param(2, (0, common_1.Query)()),
+    (0, common_1.Post)('/send'),
+    __param(0, (0, common_1.Query)('email')),
+    __param(1, (0, common_1.Query)('name')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object, Object]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], MailsController.prototype, "sendEmailPassword", null);
 MailsController = __decorate([
