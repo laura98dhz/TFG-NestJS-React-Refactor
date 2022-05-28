@@ -32,6 +32,35 @@ let InmueblesService = class InmueblesService {
         });
         return inmueble;
     }
+    async filer(tipo, precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip) {
+        if (!tipo) {
+            tipo = "%";
+        }
+        if (!precioMin) {
+            precioMin = 0;
+        }
+        if (!precioMax) {
+            precioMax = Number.MAX_VALUE;
+        }
+        if (!superficieMin) {
+            precioMin = 0;
+        }
+        if (!superficieMax) {
+            precioMax = Number.MAX_VALUE;
+        }
+        const inmueble = await this.inmuebleRepository.find({
+            where: {
+                tipoInmueble: (0, typeorm_2.Like)('%' + tipo + '%'),
+                precio: (0, typeorm_2.Between)(precioMin, precioMax),
+                habitaciones: (0, typeorm_2.MoreThanOrEqual)(habitaciones),
+                baños: (0, typeorm_2.MoreThanOrEqual)(banos),
+                superficie: (0, typeorm_2.Between)(superficieMin, superficieMax)
+            },
+            take: limit,
+            skip: skip
+        });
+        return inmueble;
+    }
     async findById(id) {
         const inmueble = await this.inmuebleRepository.findOne({
             where: {
@@ -51,68 +80,6 @@ let InmueblesService = class InmueblesService {
             take: limit,
             skip: skip
         });
-        return inmueble;
-    }
-    async filterByTipo(tipoInmueble) {
-        const inmueble = this.inmuebleRepository.find({
-            where: {
-                tipoInmueble: tipoInmueble.tipoInmueble
-            }
-        });
-        return inmueble;
-    }
-    async filterByPrecio(precio) {
-        var inmueble = {};
-        if (precio.precioMin === undefined) {
-            inmueble = this.inmuebleRepository.find({
-                precio: (0, typeorm_2.LessThanOrEqual)(precio.precioMax)
-            });
-        }
-        else if (precio.precioMax === undefined) {
-            inmueble = this.inmuebleRepository.find({
-                precio: (0, typeorm_2.MoreThanOrEqual)(precio.precioMin)
-            });
-        }
-        else {
-            inmueble = this.inmuebleRepository.find({
-                precio: (0, typeorm_2.Between)(precio.precioMin, precio.precioMax)
-            });
-        }
-        return inmueble;
-    }
-    async filterByHabitaciones(habitaciones) {
-        const inmueble = this.inmuebleRepository.find({
-            where: {
-                habitaciones: habitaciones.habitaciones
-            }
-        });
-        return inmueble;
-    }
-    async filterByBaños(baños) {
-        const inmueble = this.inmuebleRepository.find({
-            where: {
-                baños: baños.baños
-            }
-        });
-        return inmueble;
-    }
-    async filterBySuperficie(superficie) {
-        var inmueble = {};
-        if (superficie.superficieMin === undefined) {
-            inmueble = this.inmuebleRepository.find({
-                precio: (0, typeorm_2.LessThanOrEqual)(superficie.superficieMax)
-            });
-        }
-        else if (superficie.superficieMax === undefined) {
-            inmueble = this.inmuebleRepository.find({
-                precio: (0, typeorm_2.MoreThanOrEqual)(superficie.superficieMin)
-            });
-        }
-        else {
-            inmueble = this.inmuebleRepository.find({
-                precio: (0, typeorm_2.Between)(superficie.superficieMin, superficie.superficieMax)
-            });
-        }
         return inmueble;
     }
     async findByUbicacion(limit, skip, ubicacion) {

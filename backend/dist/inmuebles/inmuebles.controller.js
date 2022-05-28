@@ -24,20 +24,8 @@ let InmueblesController = class InmueblesController {
     findAll(limit, skip) {
         return this.inmueblesService.findAll(limit, skip);
     }
-    filterByTipo(tipoInmueble) {
-        return this.inmueblesService.filterByTipo(tipoInmueble);
-    }
-    filterByPrecio(precio) {
-        return this.inmueblesService.filterByPrecio(precio);
-    }
-    filterByHabitaciones(habitaciones) {
-        return this.inmueblesService.filterByHabitaciones(habitaciones);
-    }
-    filterByBaños(baños) {
-        return this.inmueblesService.filterByBaños(baños);
-    }
-    filterBySuperficie(superficie) {
-        return this.inmueblesService.filterBySuperficie(superficie);
+    filter(tipo, precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip) {
+        return this.inmueblesService.filer(tipo, precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip);
     }
     findByUsuario(limit, skip, usuario) {
         return this.inmueblesService.findByUsuario(limit, skip, usuario);
@@ -68,45 +56,21 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], InmueblesController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)('/tipoInmueble'),
+    (0, common_1.Get)('/filter'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Query)('tipo')),
+    __param(1, (0, common_1.Query)('precioMin')),
+    __param(2, (0, common_1.Query)('precioMax')),
+    __param(3, (0, common_1.Query)('habitaciones')),
+    __param(4, (0, common_1.Query)('banos')),
+    __param(5, (0, common_1.Query)('superficieMin')),
+    __param(6, (0, common_1.Query)('superficieMax')),
+    __param(7, (0, common_1.Query)('limit')),
+    __param(8, (0, common_1.Query)('skip')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_inmueble_dto_1.CreateInmuebleDto]),
+    __metadata("design:paramtypes", [String, Number, Number, String, Number, Number, Number, Number, Number]),
     __metadata("design:returntype", void 0)
-], InmueblesController.prototype, "filterByTipo", null);
-__decorate([
-    (0, common_1.Get)('/precio'),
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], InmueblesController.prototype, "filterByPrecio", null);
-__decorate([
-    (0, common_1.Get)('/habitaciones'),
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_inmueble_dto_1.CreateInmuebleDto]),
-    __metadata("design:returntype", void 0)
-], InmueblesController.prototype, "filterByHabitaciones", null);
-__decorate([
-    (0, common_1.Get)('/banos'),
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_inmueble_dto_1.CreateInmuebleDto]),
-    __metadata("design:returntype", void 0)
-], InmueblesController.prototype, "filterByBa\u00F1os", null);
-__decorate([
-    (0, common_1.Get)('/superficie'),
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], InmueblesController.prototype, "filterBySuperficie", null);
+], InmueblesController.prototype, "filter", null);
 __decorate([
     (0, common_1.Get)('/mostrar/:usuario'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),

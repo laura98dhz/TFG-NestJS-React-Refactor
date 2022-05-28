@@ -5,11 +5,7 @@ export declare class InmueblesController {
     private readonly inmueblesService;
     constructor(inmueblesService: InmueblesService);
     findAll(limit: number, skip: number): Promise<any>;
-    filterByTipo(tipoInmueble: CreateInmuebleDto): Promise<any>;
-    filterByPrecio(precio: any): Promise<any>;
-    filterByHabitaciones(habitaciones: CreateInmuebleDto): Promise<any>;
-    filterByBaños(baños: CreateInmuebleDto): Promise<any>;
-    filterBySuperficie(superficie: any): Promise<any>;
+    filter(tipo: string, precioMin: number, precioMax: number, habitaciones: string, banos: number, superficieMin: number, superficieMax: number, limit: number, skip: number): Promise<any>;
     findByUsuario(limit: number, skip: number, usuario: string): Promise<any>;
     findById(id: number): Promise<any>;
     findByUbicacion(limit: number, skip: number, ubicacion: string): Promise<any>;

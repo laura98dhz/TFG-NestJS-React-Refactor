@@ -7,13 +7,9 @@ export declare class InmueblesService {
     private usuarioRepository;
     constructor(inmuebleRepository: InmueblesRepository, usuarioRepository: UsuariosRepository);
     findAll(limit: number, skip: number): Promise<any>;
+    filer(tipo: string, precioMin: number, precioMax: number, habitaciones: string, banos: number, superficieMin: number, superficieMax: number, limit: number, skip: number): Promise<any>;
     findById(id: number): Promise<any>;
     findByUsuario(limit: number, skip: number, nombreUsuario: string): Promise<any>;
-    filterByTipo(tipoInmueble: CreateInmuebleDto): Promise<any>;
-    filterByPrecio(precio: any): Promise<any>;
-    filterByHabitaciones(habitaciones: CreateInmuebleDto): Promise<any>;
-    filterByBaños(baños: CreateInmuebleDto): Promise<any>;
-    filterBySuperficie(superficie: any): Promise<any>;
     findByUbicacion(limit: number, skip: number, ubicacion: string): Promise<any>;
     create(nombreUsuario: string, data: CreateInmuebleDto): Promise<any>;
     update(id: number, data: UpdateInmuebleDto): Promise<any>;

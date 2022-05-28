@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe, HttpStatus, HttpCode, UsePipes, ValidationPipe, UseInterceptors, UploadedFile, UploadedFiles, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe, HttpStatus, HttpCode, UsePipes, ValidationPipe, UseInterceptors, UploadedFile, UploadedFiles, Query, PreconditionFailedException } from '@nestjs/common';
 import { InmueblesService } from './inmuebles.service';
 import { CreateInmuebleDto } from './dto/create-inmueble.dto';
 import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
@@ -16,36 +16,12 @@ export class InmueblesController {
     return this.inmueblesService.findAll(limit, skip);
   }
 
-  @Get('/tipoInmueble')
+  @Get('/filter')
   @HttpCode(HttpStatus.OK)
-  filterByTipo(@Body() tipoInmueble: CreateInmuebleDto) {
-    return this.inmueblesService.filterByTipo(tipoInmueble);
+  filter(@Query('tipo') tipo: string, @Query('precioMin')precioMin: number, @Query('precioMax')precioMax: number, @Query('habitaciones')habitaciones: string, @Query('banos') banos: number, @Query('superficieMin') superficieMin: number, @Query('superficieMax') superficieMax: number, @Query('limit')limit: number, @Query('skip')skip: number) {
+    return this.inmueblesService.filer(tipo,precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip);
   }
-
-  @Get('/precio')
-  @HttpCode(HttpStatus.OK)
-  filterByPrecio(@Body() precio: any) {
-    return this.inmueblesService.filterByPrecio(precio);
-  }
-
-  @Get('/habitaciones')
-  @HttpCode(HttpStatus.OK)
-  filterByHabitaciones(@Body() habitaciones: CreateInmuebleDto) {
-    return this.inmueblesService.filterByHabitaciones(habitaciones);
-  }
-
-  @Get('/banos')
-  @HttpCode(HttpStatus.OK)
-  filterByBaños(@Body() baños: CreateInmuebleDto) {
-    return this.inmueblesService.filterByBaños(baños);
-  }
-  
-  @Get('/superficie')
-  @HttpCode(HttpStatus.OK)
-  filterBySuperficie(@Body() superficie: any) {
-    return this.inmueblesService.filterBySuperficie(superficie);
-  }
-  
+ 
   @Get('/mostrar/:usuario')
   @HttpCode(HttpStatus.OK)
   findByUsuario(@Query('limit') limit: number, @Query('skip') skip: number, @Param('usuario') usuario: string) {
