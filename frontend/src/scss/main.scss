@@ -1,0 +1,18 @@
+@import './variables.scss';
+
+@import './base.scss';
+
+@import '../components/Header/header.scss';
+@import '../components/Main/mainPrincipal.scss';
+@import '../components/CalculadoraHipoteca/calculadoraHipoteca.scss';
+@import '../components/Footer/footer.scss';
+
+@import '../components/Acceder/acceder.scss';
+@import '../components/Registro/registro.scss';
+@import '../components/Pisos/pisos.scss';
+@import '../components/Menu/menu.scss';
+@import '../components/Piso/piso.scss';
+@import '../components//AjustesUsuario/ajustesUsuario.scss';
+@import '../components/CrearInmueble/crearInmueble.scss';
+@import '../components/EditarInmueble/editarInmueble.scss';
+@import '../components/Slider/slider.scss';
