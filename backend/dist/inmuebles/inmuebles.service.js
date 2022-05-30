@@ -25,19 +25,20 @@ let InmueblesService = class InmueblesService {
         this.inmuebleRepository = inmuebleRepository;
         this.usuarioRepository = usuarioRepository;
     }
-    async findAll(limit, skip) {
-        const inmueble = await this.inmuebleRepository.find({
+    async findAll(limit, skip, operacion) {
+        if (!operacion) {
+            operacion = "%";
+        }
+        const inmueble = await this.inmuebleRepository.findAndCount({
             take: limit,
-            skip: skip
-        });
-        const inmueblesTotales = await this.inmuebleRepository.findAndCount();
-        inmueble.map(function (inmu) {
-            console.log(inmu);
-            console.log("..........");
+            skip: skip,
+            where: {
+                tipoOperacion: (0, typeorm_2.Like)('%' + operacion + '%')
+            }
         });
         return inmueble;
     }
-    async filer(tipo, precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip) {
+    async filter(tipo, precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip) {
         if (!tipo) {
             tipo = "%";
         }
@@ -53,7 +54,7 @@ let InmueblesService = class InmueblesService {
         if (!superficieMax) {
             precioMax = Number.MAX_VALUE;
         }
-        const inmueble = await this.inmuebleRepository.find({
+        const inmueble = await this.inmuebleRepository.findAndCount({
             where: {
                 tipoInmueble: (0, typeorm_2.Like)('%' + tipo + '%'),
                 precio: (0, typeorm_2.Between)(precioMin, precioMax),
@@ -78,7 +79,7 @@ let InmueblesService = class InmueblesService {
         const usuario = await (0, typeorm_2.getRepository)('UsuariosEntity').createQueryBuilder("usuario").where("usuario.nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario }).getOne();
         if (!usuario)
             throw new common_1.BadRequestException({ message: 'Ese usuario no existe' });
-        const inmueble = this.inmuebleRepository.find({
+        const inmueble = this.inmuebleRepository.findAndCount({
             where: {
                 vendedor: nombreUsuario
             },
@@ -87,10 +88,14 @@ let InmueblesService = class InmueblesService {
         });
         return inmueble;
     }
-    async findByUbicacion(limit, skip, ubicacion) {
-        const inmueble = this.inmuebleRepository.find({
+    async findByUbicacion(limit, skip, ubicacion, operacion) {
+        if (!operacion) {
+            operacion = "%";
+        }
+        const inmueble = this.inmuebleRepository.findAndCount({
             where: {
-                ubicacion: ubicacion
+                ubicacion: ubicacion,
+                tipoOperacion: (0, typeorm_2.Like)('%' + operacion + '%')
             },
             take: limit,
             skip: skip
@@ -103,6 +108,7 @@ let InmueblesService = class InmueblesService {
                 nombreUsuario: nombreUsuario
             }
         });
+        console.log(23456);
         if (!usuario)
             throw new common_1.BadRequestException({ message: 'Ese usuario no existe' });
         const newInmueble = this.inmuebleRepository.create(data);

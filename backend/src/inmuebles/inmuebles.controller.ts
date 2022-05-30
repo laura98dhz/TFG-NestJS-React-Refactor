@@ -12,15 +12,17 @@ export class InmueblesController {
 
   @Get('/getAll')
   @HttpCode(HttpStatus.OK)
-  findAll(@Query('limit') limit: number, @Query('skip') skip: number) {
-    return this.inmueblesService.findAll(limit, skip);
+  findAll(@Query('limit') limit: number, @Query('skip') skip: number, @Query('operacion') operacion: string) {
+    console.log(operacion)
+
+    return this.inmueblesService.findAll(limit, skip, operacion);
   }
 
   //http://localhost:8080/inmuebles/filter?tipo=P&precioMin=&precioMax=&habitaciones=&banos=&superficieMin=&superficieMax=&limit=&skip=
   @Get('/filter')
   @HttpCode(HttpStatus.OK)
   filter(@Query('tipo') tipo: string, @Query('precioMin')precioMin: number, @Query('precioMax')precioMax: number, @Query('habitaciones')habitaciones: string, @Query('banos') banos: number, @Query('superficieMin') superficieMin: number, @Query('superficieMax') superficieMax: number, @Query('limit')limit: number, @Query('skip')skip: number) {
-    return this.inmueblesService.filer(tipo,precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip);
+    return this.inmueblesService.filter(tipo,precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip);
   }
  
   @Get('/mostrar/:usuario')
@@ -35,10 +37,10 @@ export class InmueblesController {
     return this.inmueblesService.findById(id);
   }
 
-  @Get(':ubicacion')
+  @Get('/:ubicacion')
   @HttpCode(HttpStatus.OK)
-  findByUbicacion(@Query('limit') limit: number, @Query('skip') skip: number, @Param('ubicacion') ubicacion: string) {
-    return this.inmueblesService.findByUbicacion(limit, skip, ubicacion);
+  findByUbicacion(@Query('limit') limit: number, @Query('skip') skip: number, @Param('ubicacion') ubicacion: string, @Query('operacion') operacion: string) {
+    return this.inmueblesService.findByUbicacion(limit, skip, ubicacion, operacion);
   }
 
   @UsePipes(new ValidationPipe({whitelist:true}))

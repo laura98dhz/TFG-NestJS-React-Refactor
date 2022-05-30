@@ -43,4 +43,5 @@ export class CreateInmuebleDto {
     @IsNotEmpty()
     @IsString()
     readonly nombreVendedor: string;
+
 }

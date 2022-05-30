@@ -30,6 +30,7 @@ export class UsuariosService {
                 nombreUsuario: nombreUsuario
             }
         });
+
         if(!usuario) throw new NotFoundException({ message: 'Usuario Incorrecto' });
 
         return usuario;
@@ -64,9 +65,12 @@ export class UsuariosService {
     }
 
     async create(data: CreateUsuarioDto): Promise<any> {
-        
-        const exists = await this.findByNombre(data.nombreUsuario);
 
+        const exists = await this.usuarioRepository.findOne({
+            where:{
+                nombreUsuario: data.nombreUsuario
+            }
+        });
 
         if(exists) throw new BadRequestException({message: 'Ese usuario ya existe'}) 
         
@@ -78,8 +82,11 @@ export class UsuariosService {
     }
 
     async update(nombreUsuario: string, data: UpdateUsuarioDto): Promise<any>{
-        const usuario = await this.findByNombre(nombreUsuario);
-
+        const usuario = await this.usuarioRepository.findOne({
+            where:{
+                nombreUsuario: nombreUsuario
+            }
+        });
         if(!usuario) throw new BadRequestException({message: 'Ese nombre de usuario ya existe'})
         
         if(data.nombreUsuario) {

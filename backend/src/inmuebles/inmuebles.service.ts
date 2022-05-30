@@ -8,7 +8,6 @@ import { Between, getRepository, ILike, LessThanOrEqual, Like, MoreThanOrEqual }
 
 import { UsuariosEntity } from 'src/usuarios/entities/usuarios.entity';
 import { UsuariosRepository } from 'src/usuarios/usuarios.repository';
-import { map } from 'rxjs';
 
 
 @Injectable()
@@ -19,26 +18,25 @@ export class InmueblesService {
         @InjectRepository(UsuariosEntity) private usuarioRepository: UsuariosRepository
     ) { }
 
-    async findAll(limit: number, skip: number): Promise<any> {
+    async findAll(limit: number, skip: number, operacion: string): Promise<any> {
         
-        const inmueble = await this.inmuebleRepository.find({
+        if(!operacion){
+            
+            operacion="%";
+        }
+        const inmueble = await this.inmuebleRepository.findAndCount({
             
             take:limit,
-            skip:skip
+            skip:skip,
+            where:{
+                tipoOperacion: Like('%'+operacion+'%')
+            }
         });
-        const inmueblesTotales = await this.inmuebleRepository.findAndCount();
-        //console.log(inmueblesTotales[1])
-        inmueble.map(function(inmu){
-                // inmu = {inmu, total: inmueblesTotales[1]}
-                console.log(inmu)
-                console.log("..........")
-            
-        })
-       // console.log({...inmueble, total: inmueblesTotales[1]})
+      
         return inmueble;
     }
 
-    async filer(tipo: string, precioMin: number, precioMax: number, habitaciones: string, banos: number, superficieMin: number, superficieMax: number, limit: number, skip: number): Promise<any> {
+    async filter(tipo: string, precioMin: number, precioMax: number, habitaciones: string, banos: number, superficieMin: number, superficieMax: number, limit: number, skip: number): Promise<any> {
         
         if(!tipo){
             tipo="%";
@@ -56,7 +54,7 @@ export class InmueblesService {
             precioMax=Number.MAX_VALUE;
         }
 
-        const inmueble = await this.inmuebleRepository.find({
+        const inmueble = await this.inmuebleRepository.findAndCount({
             where:{
                 tipoInmueble: Like('%'+tipo+'%'),
                 precio: Between(precioMin, precioMax),
@@ -87,7 +85,7 @@ export class InmueblesService {
         
         if(!usuario) throw new BadRequestException({message: 'Ese usuario no existe'}) 
 
-        const inmueble = this.inmuebleRepository.find({
+        const inmueble = this.inmuebleRepository.findAndCount({
             where: {
                 vendedor: nombreUsuario
             },
@@ -97,10 +95,17 @@ export class InmueblesService {
         return inmueble;
     }
     
-    async findByUbicacion(limit: number, skip: number, ubicacion: string): Promise<any> {
-        const inmueble = this.inmuebleRepository.find({
+    async findByUbicacion(limit: number, skip: number, ubicacion: string, operacion: string): Promise<any> {
+        
+        if(!operacion){
+            
+            operacion="%";
+        }
+
+        const inmueble = this.inmuebleRepository.findAndCount({
             where: {
-                ubicacion: ubicacion
+                ubicacion: ubicacion,
+                tipoOperacion: Like('%'+operacion+'%')
             },
             take:limit,
             skip:skip
@@ -109,13 +114,12 @@ export class InmueblesService {
     }
 
     async create(nombreUsuario: string, data: CreateInmuebleDto): Promise<any> {
-        
         const usuario = this.usuarioRepository.findOne({
             where: {
                 nombreUsuario: nombreUsuario
             }
         });
-        
+        console.log(23456)
         if(!usuario) throw new BadRequestException({message: 'Ese usuario no existe'}) 
 
         const newInmueble = this.inmuebleRepository.create(data);
@@ -124,7 +128,7 @@ export class InmueblesService {
                 nombreUsuario:nombreUsuario
             }
         });
-
+        
         await this.inmuebleRepository.save(newInmueble);
         
         return newInmueble;

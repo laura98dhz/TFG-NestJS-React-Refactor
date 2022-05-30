@@ -5,13 +5,13 @@ import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 export class UsuariosEntity{
 
     @PrimaryColumn()
-    readonly nombreUsuario: string;
+    nombreUsuario: string;
 
     @Column({type: 'varchar', length: 100, nullable: false})
-    readonly contraseña: string;
+    contraseña: string;
     
     @Column({type: 'varchar', nullable: false})
-    readonly correo: string;
+    correo: string;
 
     @OneToMany(() => InmueblesEntity, (inmuebleEntity) => inmuebleEntity.vendedor)
     inmuebles: InmueblesEntity[]; 

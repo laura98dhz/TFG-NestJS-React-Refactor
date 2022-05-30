@@ -17,7 +17,6 @@ let MailsService = class MailsService {
         this.mailerService = mailerService;
     }
     async sendMailWelcome(email, name) {
-        console.log(email, name);
         await this.mailerService.sendMail({
             to: email,
             subject: 'Creacion Usuario Golden Houses',

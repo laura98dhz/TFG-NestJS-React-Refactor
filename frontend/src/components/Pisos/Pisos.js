@@ -8,7 +8,6 @@ import { useRef, useState, useEffect } from "react";
 function Pisos(props){
    
     const [pisos, setPisos] = useState([]);
-    const [cont, setCont] = useState(0);
     const [ubicacion, setUbicacion] = useState();
 
     const [skip,setSkip] = useState(0);
@@ -16,100 +15,86 @@ function Pisos(props){
     const next = useRef(null);
     const previous = useRef(null);
 
-    if(props.ubicacion !== "" && cont=== 0){
-
-        fetch("http://localhost:8080/inmuebles"+'/'+ props.ubicacion, { 
-            'method': 'GET',
-            'headers': { 'Content-Type': 'application/json' },    
-        }).then(result => {
-            return result.json();
-        }).then( datos => {
-            setPisos(datos);
-            setCont(1);
-            setUbicacion(true);
-        })
-        .catch(err => console.log('Solicitud fallida', err)); 
-         
-
-    }else if(props.ubicacion === "" && cont=== 0){
-
-        fetch("http://localhost:8080/inmuebles/getAll?limit=5&skip="+skip, { 
-            'method': 'GET',
-            'headers': { 'Content-Type': 'application/json' },    
-        }).then(result => {
-            return result.json();
-        }).then( datos => {
-            setPisos(datos);
-            setCont(1)
-            setUbicacion(false);
-        })
-        .catch(err => console.log('Solicitud fallida', err)); 
-
-    }
-
-    useEffect(() => {
-        console.log(skip)
+    function botones(datos){
+        console.log(datos[1])
+        if(datos[1]>=5){
+            next.current.style.display = "inline";
+        }else if(datos[1]<=5){
+            next.current.style.display = "none";
+        }
+        if(skip+5>=datos[1]){
+            next.current.style.display = "none";
+        }
         if(skip === 0){
             previous.current.style.display = "none";
-            next.current.style.display = "inline";
-        }
-        if(skip + 5 >= pisos.length){
+        }else{
             previous.current.style.display = "inline";
-            next.current.style.display = "none";
         }
-        if(skip === 0 && skip + 5 >= pisos.length){
-            previous.current.style.display = "none";
-            next.current.style.display = "none";
+    }
+console.log(pisos)
+    useEffect(()=>{
+        if(props.ubicacion !== "" ){
+    
+            fetch("http://localhost:8080/inmuebles/"+props.ubicacion+"?limit=5&skip="+skip+"&operacion="+props.opcion, { 
+                'method': 'GET',
+                'headers': { 'Content-Type': 'application/json' },    
+            }).then(result => {
+                return result.json();
+            }).then( datos => {
+                setPisos(datos);
+                setUbicacion(true);
+                botones(datos);
+            })
+            .catch(err => console.log('Solicitud fallida', err)); 
+             
+    
+        }else if(props.ubicacion === "" ){
+    
+            fetch("http://localhost:8080/inmuebles/getAll?limit=5&skip="+skip+"&operacion="+props.opcion, { 
+                'method': 'GET',
+                'headers': { 'Content-Type': 'application/json' },    
+            }).then(result => {
+                return result.json();
+            }).then( datos => {
+                setPisos(datos);
+                setUbicacion(false);
+                botones(datos);
+            })
+            .catch(err => console.log('Solicitud fallida', err)); 
+    
         }
+    },[skip])     
 
-      }, skip);
-      
- 
-    console.log(">>>>>>",pisos.length)
+
 
     function previousPage(e){
         e.nativeEvent.preventDefault();
-
+        setSkip(skip-5);
     }
 
     function nextPage(e){
         e.nativeEvent.preventDefault();
- 
+        setSkip(skip+5); 
     }
+    console.log(props.opcion)
 
     return(
         <>
         <main className='main'>
             <Menu/>
             <section className='main-pisos'>
-                   {
-                       ubicacion ? (
-                            pisos.map(function(piso){
-                                
-                                if(props.tipoOperacion !== ""  && piso.tipoOperacion === props.opcion){
-                                    return(
-                                        <Piso piso={piso}/>                                                         
-                                    )
-                                }else if(props.opcion === "" ){
-                                    return(
-                                        <Piso piso={piso}/>                                                         
-                                    )
-                                }
-                            })
-                       ) : (
-                            pisos.map(function(piso){
-                                if(props.tipoOperacion !== ""  && piso.tipoOperacion === props.opcion){
-                                    return(
-                                        <Piso piso={piso}/>                                                         
-                                    )
-                                }else if(props.opcion === "" ){
-                                    return(
-                                        <Piso piso={piso}/>                                                         
-                                    )
-                                }
-                            })
-                       )
-                   }
+                {
+                    pisos[1]===0 ? <p>No hay inmuebles</p> : (
+                        pisos[0]?.map(function(piso){
+                        return(
+                            <Piso piso={piso}/>                              
+                        )
+                        })
+                    )
+                              
+                }
+                
+                
                 <div className=''>
                     <button ref={previous} onClick={(e)=>previousPage(e)}>
                         <i class="fa-solid fa-angle-left"></i>
@@ -118,6 +103,9 @@ function Pisos(props){
                         <i class="fa-solid fa-angle-right"></i>
                     </button>
                 </div>
+                    
+                
+                
             </section>
         </main>
         </>

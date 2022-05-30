@@ -63,7 +63,11 @@ let UsuariosService = class UsuariosService {
         return isMatch;
     }
     async create(data) {
-        const exists = await this.findByNombre(data.nombreUsuario);
+        const exists = await this.usuarioRepository.findOne({
+            where: {
+                nombreUsuario: data.nombreUsuario
+            }
+        });
         if (exists)
             throw new common_1.BadRequestException({ message: 'Ese usuario ya existe' });
         const contraseñaHash = await bcrypt.hash(data.contraseña, 10);
@@ -73,7 +77,11 @@ let UsuariosService = class UsuariosService {
         return newUsuario;
     }
     async update(nombreUsuario, data) {
-        const usuario = await this.findByNombre(nombreUsuario);
+        const usuario = await this.usuarioRepository.findOne({
+            where: {
+                nombreUsuario: nombreUsuario
+            }
+        });
         if (!usuario)
             throw new common_1.BadRequestException({ message: 'Ese nombre de usuario ya existe' });
         if (data.nombreUsuario) {
