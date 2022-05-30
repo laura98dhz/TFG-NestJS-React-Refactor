@@ -112,7 +112,6 @@ let InmueblesService = class InmueblesService {
                 nombreUsuario: nombreUsuario
             }
         });
-        console.log(23456);
         if (!usuario)
             throw new common_1.BadRequestException({ message: 'Ese usuario no existe' });
         const newInmueble = this.inmuebleRepository.create(data);
@@ -168,7 +167,8 @@ let InmueblesService = class InmueblesService {
             tipoOperacion: inmueble.tipoOperacion,
             ubicacion: inmueble.ubicacion
         });
-        return { message: 'usuario modificado' };
+        const listaInmuebles = await this.inmuebleRepository.findAndCount();
+        return listaInmuebles;
     }
     async delete(id) {
         const inmueble = await this.inmuebleRepository.findOne({
@@ -181,7 +181,8 @@ let InmueblesService = class InmueblesService {
         await this.inmuebleRepository.delete({
             id: id
         });
-        return { message: 'inmueble eliminado' };
+        const listaInmuebles = await this.inmuebleRepository.findAndCount();
+        return listaInmuebles;
     }
 };
 InmueblesService = __decorate([

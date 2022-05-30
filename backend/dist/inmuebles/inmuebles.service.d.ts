@@ -1,3 +1,4 @@
+import { InmueblesEntity } from './entities/inmuebles.entity';
 import { InmueblesRepository } from './inmuebles.repository';
 import { CreateInmuebleDto } from './dto/create-inmueble.dto';
 import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
@@ -13,7 +14,5 @@ export declare class InmueblesService {
     findByUbicacion(limit: number, skip: number, ubicacion: string, operacion: string): Promise<any>;
     create(nombreUsuario: string, data: CreateInmuebleDto): Promise<any>;
     update(id: number, data: UpdateInmuebleDto): Promise<any>;
-    delete(id: number): Promise<{
-        message: string;
-    }>;
+    delete(id: number): Promise<[InmueblesEntity[], number]>;
 }

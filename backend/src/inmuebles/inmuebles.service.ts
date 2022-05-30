@@ -123,7 +123,6 @@ export class InmueblesService {
                 nombreUsuario: nombreUsuario
             }
         });
-        console.log(23456)
         if(!usuario) throw new BadRequestException({message: 'Ese usuario no existe'}) 
 
         const newInmueble = this.inmuebleRepository.create(data);
@@ -192,7 +191,8 @@ export class InmueblesService {
                 ubicacion: inmueble.ubicacion
             });
                         
-        return {message: 'usuario modificado'};
+            const listaInmuebles = await this.inmuebleRepository.findAndCount();
+            return listaInmuebles;
     }
 
     async delete(id: number){
@@ -207,8 +207,9 @@ export class InmueblesService {
         await this.inmuebleRepository.delete({
             id: id
         });
-                                  
-        return {message: 'inmueble eliminado'};
+                
+        const listaInmuebles = await this.inmuebleRepository.findAndCount();
+        return listaInmuebles;
 
     }
 

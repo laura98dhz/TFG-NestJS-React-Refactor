@@ -11,7 +11,5 @@ export declare class InmueblesController {
     findByUbicacion(limit: number, skip: number, ubicacion: string, operacion: string): Promise<any>;
     create(vendedor: string, data: CreateInmuebleDto): Promise<any>;
     update(id: number, data: UpdateInmuebleDto): Promise<any>;
-    remove(id: number): Promise<{
-        message: string;
-    }>;
+    remove(id: number): Promise<[import("./entities/inmuebles.entity").InmueblesEntity[], number]>;
 }

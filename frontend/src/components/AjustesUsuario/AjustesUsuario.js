@@ -7,7 +7,7 @@ export default function AjustesUsuario(props){
     const contraseña = useRef(null);
     
     const [inmuebles, setInmuebles] = useState([]);
-    const [borrado, setBorrado] = useState(false);
+    const [usuarios, setUsuarios] = useState([]);
     const [mensajeError, setMensajeError] = useState("");
     const [skip,setSkip] = useState(0);
 
@@ -45,7 +45,7 @@ export default function AjustesUsuario(props){
         })
         .catch(err => console.log('Solicitud fallida', err));
     
-    },[borrado][skip])
+    },[skip])
 
 
     function previousPage(e){
@@ -68,10 +68,30 @@ export default function AjustesUsuario(props){
 
     function actualizarDatos(e){
         e.nativeEvent.preventDefault();
-        
-        if(usuario.current.value && contraseña.current.value && correo.current.value){
-           
-            fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
+        fetch("http://localhost:8080/usuarios/"+ sessionStorage.getItem('usuario'), { 
+            'method': 'GET',
+            'headers': { 'Content-Type': 'application/json' },    
+        })
+        .then(result => {
+            return result.json()
+        })
+        .then( datos => {
+            setUsuarios(datos)
+        })
+        .catch(err => console.log('Solicitud fallida', err));
+
+        if(usuario.current.value === ""){
+            usuario.current.value = usuarios.nombreUsuario;
+        }
+        if(correo.current.value === ""){
+            console.log(usuarios.correo)
+            correo.current.value = usuarios.correo;
+        }
+        if(contraseña.current.value === ""){
+            contraseña.current.value = usuarios.contraseña;
+        }
+
+        fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
             'method': 'PUT',
             'headers': { 'Content-Type': 'application/json' },    
             'body': JSON.stringify({
@@ -79,116 +99,27 @@ export default function AjustesUsuario(props){
                 'contraseña': contraseña.current.value,
                 'correo': correo.current.value
             })
-            })
-            .then(() => {
-                setMensajeError("")
-            })
-            .catch(setMensajeError("Ese usuario ya existe"));
-        }
+        })
+        .then(() => {
+            sessionStorage.setItem("usuario",usuario.current.value);
+            sessionStorage.setItem("correo",correo.current.value);
 
-        if(usuario.current.value && contraseña.current.value ){
-            fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
-                'method': 'PUT',
-                'headers': { 'Content-Type': 'application/json' },    
-                'body': JSON.stringify({
-                    'nombreUsuario': usuario.current.value,
-                    'contraseña': contraseña.current.value
-                })
-                })
-                .then(() => {
-                    setMensajeError("")
-                })
-                .catch(setMensajeError("Ese usuario ya existe"));
-            }
-        if(usuario.current.value && correo.current.value){
-           
-            fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
-            'method': 'PUT',
-            'headers': { 'Content-Type': 'application/json' },    
-            'body': JSON.stringify({
-                'nombreUsuario': usuario.current.value,
-                'correo': correo.current.value
-            })
-            })
-            .then(() => {
-                setMensajeError("")
-            })
-            .catch(setMensajeError("Ese usuario ya existe"));
-        }
-
-        if(contraseña.current.value && correo.current.value){
-           
-            fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
-            'method': 'PUT',
-            'headers': { 'Content-Type': 'application/json' },    
-            'body': JSON.stringify({
-                'contraseña': contraseña.current.value,
-                'correo': correo.current.value
-            })
-            })
-            .then(() => {
-                setMensajeError("")
-            })
-            .catch(err => console.log('Solicitud fallida', err));
-        }
-
-        if(usuario.current.value){
-           
-            fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
-            'method': 'PUT',
-            'headers': { 'Content-Type': 'application/json' },    
-            'body': JSON.stringify({
-                'nombreUsuario': usuario.current.value,
-            })
-            })
-            .then(() => {
-                setMensajeError("")
-            })
-            .catch(setMensajeError("Ese usuario ya existe"));
-        }
-
-        if(contraseña.current.value){
-           
-            fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
-            'method': 'PUT',
-            'headers': { 'Content-Type': 'application/json' },    
-            'body': JSON.stringify({
-                'contraseña': contraseña.current.value,
-            })
-            })
-            .then(() =>{ 
-                setMensajeError("")
-            })
-            .catch(err => console.log('Solicitud fallida', err));
-        }
-
-        if(correo.current.value){
-           
-            fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
-            'method': 'PUT',
-            'headers': { 'Content-Type': 'application/json' },    
-            'body': JSON.stringify({
-                'correo': correo.current.value
-            })
-            })
-            .then(() => {
-                setMensajeError("")
-            })
-            .catch(err => console.log('Solicitud fallida', err));
-        }
+        })
+        .catch(setMensajeError("Ese usuario ya existe"));
     }
 
     function borrar(id){
         fetch("http://localhost:8080/inmuebles/" + id, { 
             'method': 'DELETE',
-            'headers': { 'Content-Type': 'application/json' },    
-            'body': JSON.stringify({
-                'id': id
-            })
-        })
-        .catch(err => console.log('Solicitud fallida', err)); 
+            'headers': { 'Content-Type': 'application/json' }    
+            
+        }).then(result => {
+            return result.json()
+        }).then(datos=>{
+            setInmuebles(datos[0])
+            botones(datos);
+        }).catch(err => console.log('Solicitud fallida', err)); 
 
-        borrado ? setBorrado(false) : setBorrado(true);
     }
 
     function editar(id){
