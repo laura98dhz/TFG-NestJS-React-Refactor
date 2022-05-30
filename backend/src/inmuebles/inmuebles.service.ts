@@ -8,6 +8,7 @@ import { Between, getRepository, ILike, LessThanOrEqual, Like, MoreThanOrEqual }
 
 import { UsuariosEntity } from 'src/usuarios/entities/usuarios.entity';
 import { UsuariosRepository } from 'src/usuarios/usuarios.repository';
+import { map } from 'rxjs';
 
 
 @Injectable()
@@ -21,10 +22,19 @@ export class InmueblesService {
     async findAll(limit: number, skip: number): Promise<any> {
         
         const inmueble = await this.inmuebleRepository.find({
+            
             take:limit,
             skip:skip
         });
-        
+        const inmueblesTotales = await this.inmuebleRepository.findAndCount();
+        //console.log(inmueblesTotales[1])
+        inmueble.map(function(inmu){
+                // inmu = {inmu, total: inmueblesTotales[1]}
+                console.log(inmu)
+                console.log("..........")
+            
+        })
+       // console.log({...inmueble, total: inmueblesTotales[1]})
         return inmueble;
     }
 

@@ -41,4 +41,7 @@ export class InmueblesEntity {
 
     @OneToMany(() => ImagenesEntity, (imagenesEntity) => imagenesEntity.inmueble)
     imagenes: Array<ImagenesEntity>; 
+
+    // @Column({type: 'int', nullable: false})
+    // total: number
 }

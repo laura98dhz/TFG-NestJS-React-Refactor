@@ -30,6 +30,11 @@ let InmueblesService = class InmueblesService {
             take: limit,
             skip: skip
         });
+        const inmueblesTotales = await this.inmuebleRepository.findAndCount();
+        inmueble.map(function (inmu) {
+            console.log(inmu);
+            console.log("..........");
+        });
         return inmueble;
     }
     async filer(tipo, precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip) {
