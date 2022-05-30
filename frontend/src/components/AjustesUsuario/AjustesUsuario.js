@@ -9,9 +9,30 @@ export default function AjustesUsuario(props){
     const [inmuebles, setInmuebles] = useState([]);
     const [borrado, setBorrado] = useState(false);
     const [mensajeError, setMensajeError] = useState("");
-    console.log(mensajeError)
+    const [skip,setSkip] = useState(0);
+
+    const next = useRef(null);
+    const previous = useRef(null);
+
+    function botones(datos){
+        console.log(datos[1])
+        if(datos[1]>=5){
+            next.current.style.display = "inline";
+        }else if(datos[1]<=5){
+            next.current.style.display = "none";
+        }
+        if(skip+5>=datos[1]){
+            next.current.style.display = "none";
+        }
+        if(skip === 0){
+            previous.current.style.display = "none";
+        }else{
+            previous.current.style.display = "inline";
+        }
+    }
+
     useEffect(()=>{
-        fetch("http://localhost:8080/inmuebles/mostrar/"+ sessionStorage.getItem('usuario'), { 
+        fetch("http://localhost:8080/inmuebles/mostrar/"+ sessionStorage.getItem('usuario')+"?limit=5&skip="+skip, { 
             'method': 'GET',
             'headers': { 'Content-Type': 'application/json' },    
         })
@@ -19,12 +40,24 @@ export default function AjustesUsuario(props){
             return result.json()
         })
         .then( datos => {
-            setInmuebles(datos)
+            setInmuebles(datos[0])
+            botones(datos);
         })
         .catch(err => console.log('Solicitud fallida', err));
     
-    },[borrado])
+    },[borrado][skip])
 
+
+    function previousPage(e){
+        e.nativeEvent.preventDefault();
+        setSkip(skip-5);
+    }
+
+    function nextPage(e){
+        e.nativeEvent.preventDefault();
+        setSkip(skip+5); 
+    }
+    
     function cerrarSesion(e){
         e.nativeEvent.preventDefault();
 
@@ -185,7 +218,7 @@ export default function AjustesUsuario(props){
                 <p>Mis inmuebles</p>
                 <div className="ajustesUsuario--inmuebles--container">
                     {
-                        inmuebles.map(function(piso){
+                        inmuebles[1]===0 ? <p>No hay inmuebles</p> : (inmuebles.map(function(piso){
                             return(
                                 <div key={piso.id} className="ajustesUsuario--inmuebles--piso--container">
                                     <Piso piso={piso}/>
@@ -195,8 +228,16 @@ export default function AjustesUsuario(props){
                                     </div>
                                 </div>
                             )
-                        })
+                        }))
                     }
+                    <div className=''>
+                        <button ref={previous} onClick={(e) => previousPage(e)}>
+                            <i class="fa-solid fa-angle-left"></i>
+                        </button>
+                        <button ref={next} onClick={(e) => nextPage(e)}>
+                            <i class="fa-solid fa-angle-right"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <p className="ajustesUsuario--inmuebles--"></p>

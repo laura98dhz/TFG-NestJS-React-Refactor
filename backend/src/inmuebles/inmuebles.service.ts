@@ -81,7 +81,11 @@ export class InmueblesService {
 
     async findByUsuario(limit: number, skip: number, nombreUsuario: string): Promise<any> {
         
-        const usuario = await getRepository('UsuariosEntity').createQueryBuilder("usuario").where("usuario.nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario }).getOne();
+        const usuario = await this.usuarioRepository.findOne({
+            where:{
+                nombreUsuario:nombreUsuario
+            }
+        });
         
         if(!usuario) throw new BadRequestException({message: 'Ese usuario no existe'}) 
 

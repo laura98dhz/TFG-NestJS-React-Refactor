@@ -76,7 +76,11 @@ let InmueblesService = class InmueblesService {
         return inmueble;
     }
     async findByUsuario(limit, skip, nombreUsuario) {
-        const usuario = await (0, typeorm_2.getRepository)('UsuariosEntity').createQueryBuilder("usuario").where("usuario.nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario }).getOne();
+        const usuario = await this.usuarioRepository.findOne({
+            where: {
+                nombreUsuario: nombreUsuario
+            }
+        });
         if (!usuario)
             throw new common_1.BadRequestException({ message: 'Ese usuario no existe' });
         const inmueble = this.inmuebleRepository.findAndCount({
