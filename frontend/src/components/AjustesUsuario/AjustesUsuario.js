@@ -161,6 +161,7 @@ export default function AjustesUsuario(props){
                             )
                         }))
                     }
+                    <div className='main-pisos-div'></div>
                     <div className='ajustesUsuario--inmuebles-botones'>
                         <button ref={previous} onClick={(e) => previousPage(e)} className='ajustesUsuario--inmuebles-botones--previous'>
                             <i class="fa-solid fa-angle-left"></i>
