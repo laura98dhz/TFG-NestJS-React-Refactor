@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export default function CrearInmueble(props){
+    
+    const [newInmueble, setNewInmueble] = useState({});
     
     function crearInmueble(e){
         e.nativeEvent.preventDefault(); 
@@ -17,7 +21,18 @@ export default function CrearInmueble(props){
                 'descripcion': e.target.descripcion.value,
                 'nombreVendedor': sessionStorage.getItem('usuario')  
             })
+        }).then((result)=>{
+            return result.json();
+        }).then(datos => {
+            console.log(datos)
+            console.log("id>", datos.id)
+            //setNewInmueble(datos);
+            fetch("http://localhost:8080/imagenes/upload/45" , { 
+            'method': 'POST'
+            }).catch(err => console.log('Solicitud imagen fallida', err));
         })
+        .catch(err => console.log('Solicitud fallida', err));
+
         props.cerrarOnCLick()
     }
 

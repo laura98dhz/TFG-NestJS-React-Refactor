@@ -43,7 +43,7 @@ function Pisos(props) {
                 setPisos(datos);
                 botones(datos);
             })
-                .catch(err => console.log('Solicitud fallida', err));
+            .catch(err => console.log('Solicitud fallida', err));
 
 
         } else if (props.ubicacion === "") {
@@ -57,7 +57,7 @@ function Pisos(props) {
                 setPisos(datos);
                 botones(datos);
             })
-                .catch(err => console.log('Solicitud fallida', err));
+            .catch(err => console.log('Solicitud fallida', err));
 
         }
     }, [skip])
@@ -74,10 +74,21 @@ function Pisos(props) {
         setSkip(skip + 5);
     }
 
-    function filtrosSelected(filtros){
-        console.log(12345);
+    function filtrosSelected(tipoInmueble, precioMaximo, precioMinimo,habitaciones, baños, superficieMaxima, superficieMinima){
+        fetch("http://localhost:8080/inmuebles/filter?ubicacion=" + props.ubicacion + "&opcion=" + props.opcion + "&tipo=" + tipoInmueble + "&precioMin=" + precioMinimo + "&precioMax=" + precioMaximo + "&habitaciones=" + habitaciones + "&banos=" + baños + "&superficieMin=" + superficieMinima + "&superficieMax=" + superficieMaxima + "&limit=5&skip=" + skip , {
+                'method': 'GET',
+                'headers': { 'Content-Type': 'application/json' },
+            }).then(result => {
+                return result.json();
+            }).then(datos => {
+                setPisos(datos);
+                botones(datos);
+            })
+            .catch(err => console.log('Solicitud fallida', err));
     }
 
+    console.log(pisos);
+    console.log(pisos[0])
     return (
         <>
             <main className='main'>
