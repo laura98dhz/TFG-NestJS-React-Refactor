@@ -8,17 +8,21 @@ import img1 from './img/fondoPaginaPrincipal.jpg';
 export default function Slider() {
 
     return(
-        <Carousel>
-            <div>
-                <img src={img1} />
-            </div>
-            <div>
-                <img src={img2} />
-            </div>
-            <div>
-                <img src={img3} />
-            </div>
-        </Carousel>   
+        <section className="slider">
+
+            <Carousel className="slider--container">
+                <div className="slider-img-container">
+                    <img src={img1} className="slider--img"/>
+                </div>
+                <div>
+                    <img src={img2} />
+                </div>
+                <div>
+                    <img src={img3} />
+                </div>
+            </Carousel>   
+
+        </section>
     );
 
     

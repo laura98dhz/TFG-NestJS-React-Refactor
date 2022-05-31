@@ -88,7 +88,9 @@ function Pisos(props) {
                             })
                         )
                     }
+                    <div className='main-pisos-div'>
 
+                    </div>
                     <div className='main-pisos-botones'>
                         <button ref={previous} onClick={(e) => previousPage(e)} className='main-pisos-botones--previous'>
                             <i class="fa-solid fa-angle-left"></i>
