@@ -1,12 +1,19 @@
 function Menu(props){
+    function devolverFiltros(e){
+        e.nativeEvent.preventDefault();
+        console.log(e.target.tipoInmueble.value);
+        props.filtros();
+    }
+
+
     return(
         <nav className="menu--inmuebles--container">
-            <form>
+            <form onSubmit={(e)=>devolverFiltros(e)}>
                 <div className="menu--inmuebles--item menu--inmuebles--item--1">
                 <p className="menu--inmuebles--item--texto menu--inmuebles--item--texto--1">Tipo De Inmueble</p>
                     <div>
-                        <input type="checkbox" name="tipoInmueble" value="Piso"></input> Piso
-                        <input type="checkbox" name="tipoInmueble" value="Casa"></input> Casa
+                        <input type="checkbox" name="tipoInmueble[]" value="Piso"></input> Piso
+                        <input type="checkbox" name="tipoInmueble[]" value="Casa"></input> Casa
                     </div>
                 </div>
                 <div className="menu--inmuebles--item menu--inmuebles--item--2">
@@ -40,7 +47,7 @@ function Menu(props){
                         Máxima <input type="number" name="superficieMaximo"></input>
                     </div>
                 </div> 
-                <input className="menu--inmuebles--item--boton" type="submit" value="Filtrar" onClick={(e)=>{e.nativeEvent.preventDefault(); props.filtros()}}></input>
+                <input className="menu--inmuebles--item--boton" type="submit" value="Filtrar"></input>
             </form>
         </nav>
     )
