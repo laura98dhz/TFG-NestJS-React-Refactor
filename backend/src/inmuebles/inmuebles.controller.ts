@@ -21,8 +21,9 @@ export class InmueblesController {
   //http://localhost:8080/inmuebles/filter?tipo=P&precioMin=&precioMax=&habitaciones=&banos=&superficieMin=&superficieMax=&limit=&skip=
   @Get('/filter')
   @HttpCode(HttpStatus.OK)
-  filter(@Query('tipo') tipo: string, @Query('precioMin')precioMin: number, @Query('precioMax')precioMax: number, @Query('habitaciones')habitaciones: string, @Query('banos') banos: number, @Query('superficieMin') superficieMin: number, @Query('superficieMax') superficieMax: number, @Query('limit')limit: number, @Query('skip')skip: number) {
-    return this.inmueblesService.filter(tipo,precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip);
+  filter(@Query('ubicacion') ubicacion: string, @Query('opcion') opcion: string, @Query('tipo') tipo: string, @Query('precioMin')precioMin: number, @Query('precioMax')precioMax: number, @Query('habitaciones')habitaciones: number, @Query('banos') banos: number, @Query('superficieMin') superficieMin: number, @Query('superficieMax') superficieMax: number, @Query('limit')limit: number, @Query('skip')skip: number) {
+   
+    return this.inmueblesService.filter(ubicacion,opcion,tipo,precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip);
   }
  
   @Get('/mostrar/:usuario')

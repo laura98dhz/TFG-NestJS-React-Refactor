@@ -73,7 +73,7 @@ function Pisos(props) {
         e.nativeEvent.preventDefault();
         setSkip(skip + 5);
     }
-
+console.log(props)
     return (
         <>
             <main className='main'>

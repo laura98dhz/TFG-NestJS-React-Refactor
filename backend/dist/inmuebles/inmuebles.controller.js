@@ -25,8 +25,8 @@ let InmueblesController = class InmueblesController {
         console.log(operacion);
         return this.inmueblesService.findAll(limit, skip, operacion);
     }
-    filter(tipo, precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip) {
-        return this.inmueblesService.filter(tipo, precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip);
+    filter(ubicacion, opcion, tipo, precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip) {
+        return this.inmueblesService.filter(ubicacion, opcion, tipo, precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip);
     }
     findByUsuario(limit, skip, usuario) {
         return this.inmueblesService.findByUsuario(limit, skip, usuario);
@@ -60,17 +60,19 @@ __decorate([
 __decorate([
     (0, common_1.Get)('/filter'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    __param(0, (0, common_1.Query)('tipo')),
-    __param(1, (0, common_1.Query)('precioMin')),
-    __param(2, (0, common_1.Query)('precioMax')),
-    __param(3, (0, common_1.Query)('habitaciones')),
-    __param(4, (0, common_1.Query)('banos')),
-    __param(5, (0, common_1.Query)('superficieMin')),
-    __param(6, (0, common_1.Query)('superficieMax')),
-    __param(7, (0, common_1.Query)('limit')),
-    __param(8, (0, common_1.Query)('skip')),
+    __param(0, (0, common_1.Query)('ubicacion')),
+    __param(1, (0, common_1.Query)('opcion')),
+    __param(2, (0, common_1.Query)('tipo')),
+    __param(3, (0, common_1.Query)('precioMin')),
+    __param(4, (0, common_1.Query)('precioMax')),
+    __param(5, (0, common_1.Query)('habitaciones')),
+    __param(6, (0, common_1.Query)('banos')),
+    __param(7, (0, common_1.Query)('superficieMin')),
+    __param(8, (0, common_1.Query)('superficieMax')),
+    __param(9, (0, common_1.Query)('limit')),
+    __param(10, (0, common_1.Query)('skip')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Number, Number, String, Number, Number, Number, Number, Number]),
+    __metadata("design:paramtypes", [String, String, String, Number, Number, Number, Number, Number, Number, Number, Number]),
     __metadata("design:returntype", void 0)
 ], InmueblesController.prototype, "filter", null);
 __decorate([

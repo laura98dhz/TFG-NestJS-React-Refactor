@@ -36,8 +36,8 @@ export class InmueblesService {
         return inmueble;
     }
 
-    async filter(tipo: string, precioMin: number, precioMax: number, habitaciones: string, banos: number, superficieMin: number, superficieMax: number, limit: number, skip: number): Promise<any> {
-        
+    async filter(ubicacion: string, opcion: string, tipo: string, precioMin: number, precioMax: number, habitaciones: number, banos: number, superficieMin: number, superficieMax: number, limit: number, skip: number): Promise<any> {
+        //console.log(ubicacion, opcion)
         if(!tipo){
             tipo="%";
         }
@@ -48,10 +48,22 @@ export class InmueblesService {
             precioMax=Number.MAX_VALUE;
         }
         if(!superficieMin){
-            precioMin=0;
+            superficieMin=0;
         }
         if(!superficieMax){
-            precioMax=Number.MAX_VALUE;
+            superficieMax=Number.MAX_VALUE;
+        }
+        if(!ubicacion){
+            ubicacion="%";
+        }
+        if(!opcion){
+            opcion="%";
+        }
+        if(!habitaciones){
+            habitaciones=0;
+        }
+        if(!banos){
+            banos=0;
         }
 
         const inmueble = await this.inmuebleRepository.findAndCount({
@@ -60,7 +72,9 @@ export class InmueblesService {
                 precio: Between(precioMin, precioMax),
                 habitaciones: MoreThanOrEqual(habitaciones),
                 baños: MoreThanOrEqual(banos),
-                superficie: Between(superficieMin, superficieMax)
+                superficie: Between(superficieMin, superficieMax),
+                ubicacion: Like('%'+ubicacion+'%'),
+                tipoOperacion: Like('%'+opcion+'%')
             },
             take: limit,
             skip: skip

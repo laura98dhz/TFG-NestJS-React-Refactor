@@ -38,7 +38,7 @@ let InmueblesService = class InmueblesService {
         });
         return inmueble;
     }
-    async filter(tipo, precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip) {
+    async filter(ubicacion, opcion, tipo, precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip) {
         if (!tipo) {
             tipo = "%";
         }
@@ -49,10 +49,22 @@ let InmueblesService = class InmueblesService {
             precioMax = Number.MAX_VALUE;
         }
         if (!superficieMin) {
-            precioMin = 0;
+            superficieMin = 0;
         }
         if (!superficieMax) {
-            precioMax = Number.MAX_VALUE;
+            superficieMax = Number.MAX_VALUE;
+        }
+        if (!ubicacion) {
+            ubicacion = "%";
+        }
+        if (!opcion) {
+            opcion = "%";
+        }
+        if (!habitaciones) {
+            habitaciones = 0;
+        }
+        if (!banos) {
+            banos = 0;
         }
         const inmueble = await this.inmuebleRepository.findAndCount({
             where: {
@@ -60,7 +72,9 @@ let InmueblesService = class InmueblesService {
                 precio: (0, typeorm_2.Between)(precioMin, precioMax),
                 habitaciones: (0, typeorm_2.MoreThanOrEqual)(habitaciones),
                 baños: (0, typeorm_2.MoreThanOrEqual)(banos),
-                superficie: (0, typeorm_2.Between)(superficieMin, superficieMax)
+                superficie: (0, typeorm_2.Between)(superficieMin, superficieMax),
+                ubicacion: (0, typeorm_2.Like)('%' + ubicacion + '%'),
+                tipoOperacion: (0, typeorm_2.Like)('%' + opcion + '%')
             },
             take: limit,
             skip: skip
