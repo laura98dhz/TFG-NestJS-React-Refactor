@@ -89,11 +89,11 @@ function Pisos(props) {
                         )
                     }
 
-                    <div className=''>
-                        <button ref={previous} onClick={(e) => previousPage(e)}>
+                    <div className='main-pisos-botones'>
+                        <button ref={previous} onClick={(e) => previousPage(e)} className='main-pisos-botones--previous'>
                             <i class="fa-solid fa-angle-left"></i>
                         </button>
-                        <button ref={next} onClick={(e) => nextPage(e)}>
+                        <button ref={next} onClick={(e) => nextPage(e)} className='main-pisos-botones--next'>
                             <i class="fa-solid fa-angle-right"></i>
                         </button>
                     </div>

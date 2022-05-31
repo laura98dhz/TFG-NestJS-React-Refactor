@@ -115,6 +115,48 @@
                 }
             }
         }
+        &-botones{
+            margin-top: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &--previous{
+                margin-right: 5rem;
+                width: 3rem;
+                height: 3rem;
+                color:  rgb(57, 102, 102);
+                border: 1px solid rgb(57, 102, 102);
+                border-radius: 100%;
+                background-color: rgb(241, 241, 241);
+                cursor: pointer;
+                transition: all ease .5s;
+                &:hover{
+                    background-color: rgb(176, 158, 128);
+                    border: 1px solid rgb(241, 241, 241);
+                    color: rgb(241, 241, 241);
+                    transform: scale(1.2);
+                }
+            }
+
+            &--next{
+                margin-left: 5rem;
+                width: 3rem;
+                height: 3rem;
+                color:  rgb(57, 102, 102);
+                border: 1px solid rgb(57, 102, 102);
+                border-radius: 100%;
+                background-color: rgb(241, 241, 241);
+                cursor: pointer;
+                transition: all ease .5s;
+
+                &:hover{
+                    background-color: rgb(176, 158, 128);
+                    border: 1px solid rgb(241, 241, 241);
+                    color: rgb(241, 241, 241);
+                    transform: scale(1.2);
+                }
+            }
+        }
     }
     &--cerrarSesion{
         & > button{

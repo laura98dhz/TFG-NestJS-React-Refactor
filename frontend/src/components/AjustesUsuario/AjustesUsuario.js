@@ -161,11 +161,11 @@ export default function AjustesUsuario(props){
                             )
                         }))
                     }
-                    <div className=''>
-                        <button ref={previous} onClick={(e) => previousPage(e)}>
+                    <div className='ajustesUsuario--inmuebles-botones'>
+                        <button ref={previous} onClick={(e) => previousPage(e)} className='ajustesUsuario--inmuebles-botones--previous'>
                             <i class="fa-solid fa-angle-left"></i>
                         </button>
-                        <button ref={next} onClick={(e) => nextPage(e)}>
+                        <button ref={next} onClick={(e) => nextPage(e)} className='ajustesUsuario--inmuebles-botones--next'>
                             <i class="fa-solid fa-angle-right"></i>
                         </button>
                     </div>
