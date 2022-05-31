@@ -73,11 +73,15 @@ function Pisos(props) {
         e.nativeEvent.preventDefault();
         setSkip(skip + 5);
     }
-console.log(props)
+
+    function filtrosSelected(filtros){
+        console.log(12345);
+    }
+
     return (
         <>
             <main className='main'>
-                <Menu />
+                <Menu filtros={filtrosSelected}/>
                 <section className='main-pisos'>
                     {
                         pisos[1] === 0 ? <p>No hay inmuebles</p> : (

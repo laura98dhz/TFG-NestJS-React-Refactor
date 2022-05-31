@@ -1,4 +1,4 @@
-function Menu(){
+function Menu(props){
     return(
         <nav className="menu--inmuebles--container">
             <form>
@@ -40,7 +40,7 @@ function Menu(){
                         Máxima <input type="number" name="superficieMaximo"></input>
                     </div>
                 </div> 
-                <input className="menu--inmuebles--item--boton" type="submit" value="Filtrar"></input>
+                <input className="menu--inmuebles--item--boton" type="submit" value="Filtrar" onClick={(e)=>{e.nativeEvent.preventDefault(); props.filtros()}}></input>
             </form>
         </nav>
     )
