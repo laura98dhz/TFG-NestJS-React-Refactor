@@ -23,7 +23,6 @@ let ImagenesController = class ImagenesController {
         this.imagenesService = imagenesService;
     }
     async uploadFiles(id, files) {
-        console.log("--", files);
         return await this.imagenesService.uploadFiles(id, files);
     }
     async getPaths(id) {

@@ -17,7 +17,6 @@ export class ImagenesController {
         fileFilter: fileFilter
     }))
     async uploadFiles(@Param('id') id: number, @UploadedFiles() files: Array<Express.Multer.File>){
-        console.log("--",files);
         return await this.imagenesService.uploadFiles(id, files);
     }
 

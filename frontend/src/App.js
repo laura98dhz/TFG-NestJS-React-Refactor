@@ -13,8 +13,9 @@ import AjustesUsuario from './components/AjustesUsuario/AjustesUsuario';
 import Registro from './components/Registro/Registro';
 import CrearInmueble from './components/CrearInmueble/CrearInmueble';
 import EditarInmueble from './components/EditarInmueble/EditarInmueble';
+import axios from 'axios';
 
-function App() {
+export default function App() {
 
   const [cargarPisos, setCargarPisos] = useState(false);
   const [cargarHeader, setCargarHeader] = useState(true);
@@ -134,6 +135,7 @@ function App() {
   }
 
   console.log("app>>>",sessionStorage.getItem('usuario'))
+
   return (
     <>
       { cargarHeader ? <Header handleOnClick={mostrarMain} accederOnClick={mostrarAcceder} ajustesOnClick={ajustesUsuario} handleCargarAnuncio={cargarPonerAnuncio}/> : "" }
@@ -149,4 +151,4 @@ function App() {
   )
 }
 
-export default App;
+//export default App;
