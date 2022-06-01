@@ -3,38 +3,68 @@ import { useState } from "react";
 export default function CrearInmueble(props){
     
     const [newInmueble, setNewInmueble] = useState({});
-    
+    const [files, setFiles] = useState();
+    const [fileName, setFileName] = useState("");
     function crearInmueble(e){
         e.nativeEvent.preventDefault(); 
 
-        fetch("http://localhost:8080/inmuebles/" + sessionStorage.getItem("usuario"), { 
-            'method': 'POST',
-            'headers': { 'Content-Type': 'application/json' },    
-            'body': JSON.stringify({
-                'ubicacion': e.target.ubicacion.value,
-                'tipoInmueble': e.target.tipoInmueble.value,
-                'tipoOperacion': e.target.tipoOperacion.value,
-                'superficie': parseInt(e.target.superficie.value, 10),
-                'habitaciones': parseInt(e.target.habitaciones.value, 10),
-                'baños': parseInt(e.target.baños.value, 10),
-                'precio': parseInt(e.target.precio.value, 10),
-                'descripcion': e.target.descripcion.value,
-                'nombreVendedor': sessionStorage.getItem('usuario')  
-            })
-        }).then((result)=>{
-            return result.json();
-        }).then(datos => {
-            console.log(datos)
-            console.log("id>", datos.id)
-            //setNewInmueble(datos);
-            fetch("http://localhost:8080/imagenes/upload/45" , { 
-            'method': 'POST'
-            }).catch(err => console.log('Solicitud imagen fallida', err));
-        })
-        .catch(err => console.log('Solicitud fallida', err));
+        // fetch("http://localhost:8080/inmuebles/" + sessionStorage.getItem("usuario"), { 
+        //     'method': 'POST',
+        //     'headers': { 'Content-Type': 'application/json' },    
+        //     'body': JSON.stringify({
+        //         'ubicacion': e.target.ubicacion.value,
+        //         'tipoInmueble': e.target.tipoInmueble.value,
+        //         'tipoOperacion': e.target.tipoOperacion.value,
+        //         'superficie': parseInt(e.target.superficie.value, 10),
+        //         'habitaciones': parseInt(e.target.habitaciones.value, 10),
+        //         'baños': parseInt(e.target.baños.value, 10),
+        //         'precio': parseInt(e.target.precio.value, 10),
+        //         'descripcion': e.target.descripcion.value,
+        //         'nombreVendedor': sessionStorage.getItem('usuario')  
+        //     })
+        // }).then((result)=>{
+        //     return result.json();
+        // }).then(datos => {
+        //     console.log(datos)
+        //     console.log("id>", datos.id)
+        //     //setNewInmueble(datos);
+        //     fetch("http://localhost:8080/imagenes/upload/45" , { 
+        //     'method': 'POST',
+        //     'headers': { 'Content-Type': 'multipart/form-data' },
+        //     'body':  
+        //     }).catch(err => console.log('Solicitud imagen fallida', err));
+        // })
+        // .catch(err => console.log('Solicitud fallida', err));
 
-        props.cerrarOnCLick()
+        // props.cerrarOnCLick()
+        // const formData  = new FormData();
+        // for(const name in data) {
+        //     formData.append(name, data[name]);
+        //   }
+
+        const data = new FormData();
+        data.append("files", files);
+        for(let index = 0; index < files.length; index ++){
+            data.append("files", files[index])
+        }
+        
+       console.log(data.append)
+        fetch("http://localhost:8080/imagenes/upload/27" , { 
+            'method': 'POST',
+            'headers': { 'Content-Type': 'multipart/form-data; boundary=--------------------------548724587772830934932902' },
+            'body':({
+                // 'files': files
+            })
+            }).catch(err => console.log('Solicitud imagen fallida', err));
+      
+
     }
+
+    function saveImg(e){
+        setFiles(e.target.files);
+    }
+
+    
 
     return(
         <>
@@ -43,7 +73,7 @@ export default function CrearInmueble(props){
         <section className="crear-inmueble">
             
             <div className="crear-inmueble-container">
-                <form className="crear-inmueble-form" onSubmit={(e)=>crearInmueble(e)}>
+                <form className="crear-inmueble-form" method="post"  enctype="multipart/form-data" onSubmit={(e)=>crearInmueble(e)}>
                     
                     <div className="crear-inmueble-titulo">
                         <h2>Subir Inmueble</h2>
@@ -113,14 +143,14 @@ export default function CrearInmueble(props){
                     <div className="crear-inmueble-imagen">
                         <p className="crear-inmueble-imagen-texto ">Subir Fotos</p>
                         <div className="crear-inmueble-imagen-container">
-                            <input type="file" name="imagenes[]" className="crear-inmueble-imagen-caja" multiple></input>
+                            <input type="file" multiple name="imagenes" className="crear-inmueble-imagen-caja" onChange={(e)=>saveImg(e)}></input>
                         </div>
                     </div>
                     
                     <input type="submit" className="crear-inmueble-boton" value="Subir"/>
 
                 </form>
-                <i class="fa-solid fa-xmark crear-inmueble--cruz" onClick={()=>{props.cerrarOnCLick()}}></i>
+                <i class="fa-solid fa-xmark crear-inmueble--cruz"></i>
             </div>
         </section>
         </>

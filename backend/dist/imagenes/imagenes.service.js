@@ -38,7 +38,6 @@ let ImagenesService = class ImagenesService {
             const filename = file.filename;
             const path = file.path;
             const img = this.imagenesRepository.create({ filename, path });
-            console.log(file);
             img.inmueble = await this.inmuebleRepository.findOne({
                 where: {
                     id: id

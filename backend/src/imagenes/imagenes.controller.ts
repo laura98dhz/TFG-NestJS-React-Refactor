@@ -1,12 +1,6 @@
 import { Body, Controller, Get, Headers, Param, Post, Req, Res, StreamableFile, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
-import { response } from 'express';
-import { createReadStream } from 'fs';
-import { request } from 'http';
 import { diskStorage } from 'multer';
-import path, { join } from 'path';
-import { identity } from 'rxjs';
-import { ImagenesEntity } from './entities/imagenes.entity';
 import { fileFilter, renameImage } from './helpers/imagenes.helper';
 import { ImagenesService } from './imagenes.service';
 
@@ -23,6 +17,7 @@ export class ImagenesController {
         fileFilter: fileFilter
     }))
     async uploadFiles(@Param('id') id: number, @UploadedFiles() files: Array<Express.Multer.File>){
+        console.log("--",files);
         return await this.imagenesService.uploadFiles(id, files);
     }
 
