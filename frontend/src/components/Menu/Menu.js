@@ -25,18 +25,18 @@ function Menu(props){
                 <div className="menu--inmuebles--item menu--inmuebles--item--3">
                     <p className="menu--inmuebles--item--texto menu--inmuebles--item--texto--3">Habitaciones</p>
                     <div>
-                        <input type="radio" name="habitaciones" value="1"></input>1+
-                        <input type="radio" name="habitaciones" value="2"></input>2+
-                        <input type="radio" name="habitaciones" value="3"></input>3+
-                        <input type="radio" name="habitaciones" value="4"></input>4+
+                        <input type="radio" name="habitaciones" value="1"></input> 1+
+                        <input type="radio" name="habitaciones" value="2"></input> 2+
+                        <input type="radio" name="habitaciones" value="3"></input> 3+
+                        <input type="radio" name="habitaciones" value="4"></input> 4+
                     </div>
                 </div>
                 <div className="menu--inmuebles--item menu--inmuebles--item--4">
                     <p className="menu--inmuebles--item--texto menu--inmuebles--item--texto--4">Baños</p>
                     <div>
-                        <input type="radio" name="baños" value="1"></input>1+
-                        <input type="radio" name="baños" value="2"></input>2+
-                        <input type="radio" name="baños" value="3"></input>3+
+                        <input type="radio" name="baños" value="1"></input> 1+
+                        <input type="radio" name="baños" value="2"></input> 2+
+                        <input type="radio" name="baños" value="3"></input> 3+
                     </div>
                 </div>
                 <div className="menu--inmuebles--item menu--inmuebles--item--5">

@@ -22,7 +22,6 @@ let InmueblesController = class InmueblesController {
         this.inmueblesService = inmueblesService;
     }
     findAll(limit, skip, operacion) {
-        console.log(operacion);
         return this.inmueblesService.findAll(limit, skip, operacion);
     }
     filter(ubicacion, opcion, tipo, precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip) {

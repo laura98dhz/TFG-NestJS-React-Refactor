@@ -13,8 +13,6 @@ export class InmueblesController {
   @Get('/getAll')
   @HttpCode(HttpStatus.OK)
   findAll(@Query('limit') limit: number, @Query('skip') skip: number, @Query('operacion') operacion: string) {
-    console.log(operacion)
-
     return this.inmueblesService.findAll(limit, skip, operacion);
   }
 
@@ -22,7 +20,6 @@ export class InmueblesController {
   @Get('/filter')
   @HttpCode(HttpStatus.OK)
   filter(@Query('ubicacion') ubicacion: string, @Query('opcion') opcion: string, @Query('tipo') tipo: string, @Query('precioMin')precioMin: number, @Query('precioMax')precioMax: number, @Query('habitaciones')habitaciones: number, @Query('banos') banos: number, @Query('superficieMin') superficieMin: number, @Query('superficieMax') superficieMax: number, @Query('limit')limit: number, @Query('skip')skip: number) {
-   
     return this.inmueblesService.filter(ubicacion,opcion,tipo,precioMin, precioMax, habitaciones, banos, superficieMin, superficieMax, limit, skip);
   }
  
