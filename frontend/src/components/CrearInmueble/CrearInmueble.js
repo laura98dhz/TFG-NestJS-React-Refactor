@@ -3,8 +3,6 @@ import axios from 'axios';
 
 export default function CrearInmueble(props){
     
-    const [newInmueble, setNewInmueble] = useState({});
-
     const [archivos, setArchivos] = useState(null);
 
     function crearInmueble(e){
@@ -35,6 +33,7 @@ export default function CrearInmueble(props){
             }
             axios.post('http://localhost:8080/imagenes/upload/'+datos.id,f,{'Content-Type': 'multipart/form-data'});
         })
+        props.cerrarOnCLick();
     }
   
     const subirArchivos=e=>{
@@ -126,7 +125,7 @@ export default function CrearInmueble(props){
                     <input type="submit" className="crear-inmueble-boton" value="Subir"/>
 
                 </form>
-                <i class="fa-solid fa-xmark crear-inmueble--cruz"></i>
+                <i onClick={()=>props.cerrarOnCLick()} class="fa-solid fa-xmark crear-inmueble--cruz"></i>
             </div>
         </section>
 
