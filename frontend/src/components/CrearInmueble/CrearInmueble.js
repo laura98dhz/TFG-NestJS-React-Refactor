@@ -28,25 +28,15 @@ export default function CrearInmueble(props){
         .then((result)=>{
             return result.json();
         }).then(datos=>{
-            setNewInmueble(datos);
+
+            var f = new FormData();
+            for(let i = 0; i < archivos.length; i ++){
+                f.append("files", archivos[i])
+            }
+            axios.post('http://localhost:8080/imagenes/upload/'+datos.id,f,{'Content-Type': 'multipart/form-data'});
         })
-         
     }
   
-
-    if(newInmueble.id!==undefined){
-        var f = new FormData();
-        
-        for(let i = 0; i < archivos.length; i ++){
-            f.append("files", archivos[i])
-        }
-
-        axios.post('http://localhost:8080/imagenes/upload/'+newInmueble.id,f,{'Content-Type': 'multipart/form-data'});
-
-        props.cerrarOnCLick();
-        
-    }
-
     const subirArchivos=e=>{
         setArchivos(e)
     }
@@ -139,8 +129,7 @@ export default function CrearInmueble(props){
                 <i class="fa-solid fa-xmark crear-inmueble--cruz"></i>
             </div>
         </section>
-        {/* <input type="file" multiple onChange={(e)=> subirArchivos(e.target.files)}/>
-        <button onClick={()=>insetarArchivos()}>Insert</button> */}
+
         </>
     )
 }

@@ -1,26 +1,25 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
+import Slider from 'infinite-react-carousel';
 
-import img2 from './img/hipoteca.jpg';
-import img3 from './img/hipoteca2.jpg';
-import img1 from './img/fondoPaginaPrincipal.jpg';
+import img from './img/fondoPaginaPrincipal.jpg';
 
-export default function Slider() {
+
+export default function Sliders() {
 
     return(
         <section className="slider">
 
-            <Carousel className="slider--container">
-                <div className="slider-img-container">
-                    <img src={img1} className="slider--img"/>
+            <Slider dots>
+                <div className="slider--container">
+                    <img src={img} className="img"></img>
                 </div>
-                <div>
-                    <img src={img2} />
+                <div className="slider--container">
+                    <img src={img} className="img"></img>
                 </div>
-                <div>
-                    <img src={img3} />
-                </div>
-            </Carousel>   
+                <div className="slider--container">
+                    <img src={img} className="img"></img>
+                </div>                
+            </Slider>
 
         </section>
     );

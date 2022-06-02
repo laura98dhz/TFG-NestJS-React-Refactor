@@ -13,7 +13,7 @@ import AjustesUsuario from './components/AjustesUsuario/AjustesUsuario';
 import Registro from './components/Registro/Registro';
 import CrearInmueble from './components/CrearInmueble/CrearInmueble';
 import EditarInmueble from './components/EditarInmueble/EditarInmueble';
-import axios from 'axios';
+import Sliders from './components/Slider/Slider';
 
 export default function App() {
 
@@ -147,8 +147,7 @@ export default function App() {
       { cargarRegistro ? <Registro cargarRegistro={cargarRegistroUsuario} cerrarRegistro={mostrarMain}/> : "" }
       { sessionStorage.getItem('usuario') && cargarCrearInmueble ? <CrearInmueble cerrarOnCLick={cerrarAcceder}/> : "" } 
       { cargarEditarInmueble ? <EditarInmueble id={id} cerrarOnCLick={cerrarEditarInmueble}/> : "" } 
+      <Sliders/>
     </>
   )
 }
-
-//export default App;
