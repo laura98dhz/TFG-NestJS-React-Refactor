@@ -7,5 +7,5 @@ export declare class ImagenesController {
         message: string;
     }>;
     getPaths(id: number): Promise<any>;
-    getFile(path: any, res: any): Promise<any>;
+    getFile(path: String, res: any): Promise<any>;
 }

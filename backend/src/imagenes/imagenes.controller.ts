@@ -25,8 +25,8 @@ export class ImagenesController {
         return await this.imagenesService.getPath(id);
     }
 
-    @Get('/getImage') 
-    async getFile(@Body() path, @Res() res): Promise<any> {
+    @Post('/getImage') 
+    async getFile(@Body() path: String, @Res() res): Promise<any> {
         return await this.imagenesService.getFile(path, res);
     }
 

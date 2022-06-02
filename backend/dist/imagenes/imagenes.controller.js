@@ -55,11 +55,11 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ImagenesController.prototype, "getPaths", null);
 __decorate([
-    (0, common_1.Get)('/getImage'),
+    (0, common_1.Post)('/getImage'),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], ImagenesController.prototype, "getFile", null);
 ImagenesController = __decorate([
