@@ -1,11 +1,12 @@
 import Slider from "../Slider/Slider";
 
 export default function Piso(props){
+    
     return(
 
         <div key={props.piso.id} className="piso--container">
             <div className="piso--foto">
-                <Slider/>
+                <Slider id={props.piso.id}/>
             </div>
             <div className="piso--detalles">
                 <div className="piso--detalles--precio">
