@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 
 export default function CrearInmueble(props){
@@ -6,7 +6,6 @@ export default function CrearInmueble(props){
     const [newInmueble, setNewInmueble] = useState({});
 
     const [archivos, setArchivos] = useState(null);
-
 
     function crearInmueble(e){
         e.nativeEvent.preventDefault(); 
@@ -29,17 +28,22 @@ export default function CrearInmueble(props){
         .then((result)=>{
             return result.json();
         }).then(datos=>{
-            setNewInmueble(datos)
+            setNewInmueble(datos);
         })
-        // props.cerrarOnCLick()
+         
     }
-    
+  
+
     if(newInmueble.id!==undefined){
-        console.log(newInmueble.id)           
-            var f = new FormData();
-            f.append('files', archivos[0]);
-            axios.post('http://localhost:8080/imagenes/upload/'+newInmueble.id,f,{'Content-Type': 'multipart/form-data'})
+        var f = new FormData();
         
+        for(let i = 0; i < archivos.length; i ++){
+            f.append("files", archivos[i])
+        }
+
+        axios.post('http://localhost:8080/imagenes/upload/'+newInmueble.id,f,{'Content-Type': 'multipart/form-data'});
+
+        props.cerrarOnCLick();
         
     }
 
