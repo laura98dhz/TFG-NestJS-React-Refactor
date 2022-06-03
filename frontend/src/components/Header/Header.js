@@ -30,18 +30,18 @@ function Header(props){
             <div className='header__container'>
                 <div className='anuncio'>
                     <button className='anuncio-boton'>
-                        <i class="fa-solid fa-thumbtack anuncio-boton-icono"></i>
+                        <i className="fa-solid fa-thumbtack anuncio-boton-icono"></i>
                         <p onClick={()=>ponerAnuncio()}>Pon tu anuncio gratis</p>
                     </button>       
                 </div>
                 {sessionStorage.getItem('usuario') === null ? (
                     <div className='usuario' onClick={()=>cargarAcceder()}>
-                        <i class="fa-solid fa-user usuario-icono"></i>
+                        <i className="fa-solid fa-user usuario-icono"></i>
                         <p>Acceder</p>
                     </div>
                 ) : (
                     <div className='usuario'>
-                        <i class="fa-solid fa-user usuario-icono"></i>
+                        <i className="fa-solid fa-user usuario-icono"></i>
                         <p onClick={()=>miUsuario()}>{sessionStorage.getItem('usuario')}</p>
                     </div>
                 )}

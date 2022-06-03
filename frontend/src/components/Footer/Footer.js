@@ -17,23 +17,23 @@ function Footer(){
                 <h2 className="footer-redes-sociales-titulo">Redes Sociales</h2>
                 <ul className="footer-redes-sociales-lista">
                     <li>
-                        <i class="fa-brands fa-facebook-square"></i>
+                        <i className="fa-brands fa-facebook-square"></i>
                         <span>Siguenos en Facebook</span>
                     </li>
                     <li>
-                        <i class="fa-brands fa-instagram"></i>
+                        <i className="fa-brands fa-instagram"></i>
                         <span>Siguenos en Instagram</span>
                     </li>
                     <li>
-                        <i class="fa-brands fa-twitter-square"></i>
+                        <i className="fa-brands fa-twitter-square"></i>
                         <span>Siguenos en Twitter</span>
                     </li>
                     <li>
-                        <i class="fa-brands fa-youtube"></i>
+                        <i className="fa-brands fa-youtube"></i>
                         <span>Siguenos en YouTube</span>
                     </li>
                     <li>
-                        <i class="fa-brands fa-linkedin"></i>
+                        <i className="fa-brands fa-linkedin"></i>
                         <span>Siguenos en Linkedin</span>
                     </li>
                 
@@ -44,15 +44,15 @@ function Footer(){
                 <h2 className="footer-ubicacion-titulo">Datos De Contacto</h2>
                 <ul className="footer-ubicacion-lista">
                     <li>
-                        <i class="fa-solid fa-map-pin"></i>
+                        <i className="fa-solid fa-map-pin"></i>
                         <span>Calle Serrano, 78, 28006 Madrid</span>
                     </li>
                     <li>
-                        <i class="fa-solid fa-phone"></i>
+                        <i className="fa-solid fa-phone"></i>
                         <span>916029742</span>
                     </li>
                     <li>
-                        <i class="fa-solid fa-envelope"></i>
+                        <i className="fa-solid fa-envelope"></i>
                         <span>golden-houses@gmail.com</span>
                     </li>
                     <li>

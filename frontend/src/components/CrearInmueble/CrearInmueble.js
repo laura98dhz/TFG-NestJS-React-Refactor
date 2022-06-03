@@ -125,7 +125,7 @@ export default function CrearInmueble(props){
                     <input type="submit" className="crear-inmueble-boton" value="Subir"/>
 
                 </form>
-                <i onClick={()=>props.cerrarOnCLick()} class="fa-solid fa-xmark crear-inmueble--cruz"></i>
+                <i onClick={()=>props.cerrarOnCLick()} className="fa-solid fa-xmark crear-inmueble--cruz"></i>
             </div>
         </section>
 

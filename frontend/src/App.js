@@ -1,6 +1,3 @@
-import img2 from './components/Slider/img/hipoteca.jpg';
-import img3 from './components/Slider/img/hipoteca2.jpg';
-import img1 from './components/Slider/img/fondoPaginaPrincipal.jpg';
 
 import { useState } from 'react';
 
@@ -13,7 +10,6 @@ import AjustesUsuario from './components/AjustesUsuario/AjustesUsuario';
 import Registro from './components/Registro/Registro';
 import CrearInmueble from './components/CrearInmueble/CrearInmueble';
 import EditarInmueble from './components/EditarInmueble/EditarInmueble';
-import Sliders from './components/Slider/Slider';
 
 export default function App() {
 
@@ -147,6 +143,8 @@ export default function App() {
       { cargarRegistro ? <Registro cargarRegistro={cargarRegistroUsuario} cerrarRegistro={mostrarMain}/> : "" }
       { sessionStorage.getItem('usuario') && cargarCrearInmueble ? <CrearInmueble cerrarOnCLick={cerrarAcceder}/> : "" } 
       { cargarEditarInmueble ? <EditarInmueble id={id} cerrarOnCLick={cerrarEditarInmueble}/> : "" } 
+      <img src="%PUBLIC_URL%upload\\piso2-b8eapiso2.jpg"></img>
+    
     </>
   )
 }

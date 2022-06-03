@@ -131,7 +131,7 @@ export default function AjustesUsuario(props){
         <section className="ajustesUsuario--container">
             <div className="ajustesUsuario--usuario">
                 <div className="ajustesUsuario--usuario--imagen--container">
-                    <i class="fa-solid fa-user"></i>
+                    <i className="fa-solid fa-user"></i>
                 </div>
                 <form action="#" method="POST" className="ajustesUsuario--usuario--datos--container">
                     <p>Datos</p>
@@ -154,8 +154,8 @@ export default function AjustesUsuario(props){
                                 <div key={piso.id} className="ajustesUsuario--inmuebles--piso--container">
                                     <Piso piso={piso}/>
                                     <div className="ajustesUsuario--inmuebles--piso--botones">
-                                        <a className="ajustesUsuario--inmuebles--piso--botones--editar" onClick={()=>editar(piso.id)}><i class="fa-solid fa-square-pen"></i></a>
-                                        <a className="ajustesUsuario--inmuebles--piso--botones--borrar" onClick={()=>borrar(piso.id)}><i class="fa-solid fa-square-minus"></i></a>
+                                        <a className="ajustesUsuario--inmuebles--piso--botones--editar" onClick={()=>editar(piso.id)}><i className="fa-solid fa-square-pen"></i></a>
+                                        <a className="ajustesUsuario--inmuebles--piso--botones--borrar" onClick={()=>borrar(piso.id)}><i className="fa-solid fa-square-minus"></i></a>
                                     </div>
                                 </div>
                             )
@@ -164,10 +164,10 @@ export default function AjustesUsuario(props){
                     <div className='main-pisos-div'></div>
                     <div className='ajustesUsuario--inmuebles-botones'>
                         <button ref={previous} onClick={(e) => previousPage(e)} className='ajustesUsuario--inmuebles-botones--previous'>
-                            <i class="fa-solid fa-angle-left"></i>
+                            <i className="fa-solid fa-angle-left"></i>
                         </button>
                         <button ref={next} onClick={(e) => nextPage(e)} className='ajustesUsuario--inmuebles-botones--next'>
-                            <i class="fa-solid fa-angle-right"></i>
+                            <i className="fa-solid fa-angle-right"></i>
                         </button>
                     </div>
                 </div>

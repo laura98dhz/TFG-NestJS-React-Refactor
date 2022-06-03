@@ -117,7 +117,7 @@ function Acceder (props){
                                 <h2>Recuperar Contraseña</h2>
                             </div>
                             <div className="acceder-usuario">
-                                <i class="fa-solid fa-envelope acceder-usuario-icono"></i>
+                                <i className="fa-solid fa-envelope acceder-usuario-icono"></i>
                                 <input ref={correo} type='text' className="acceder-usuario-caja" placeholder="Correo"></input>
                             </div>
                             <button className="acceder-boton" onClick={(e)=>comprobarEmail(e)}>Enviar</button>
@@ -128,16 +128,16 @@ function Acceder (props){
                                 <h2>Acceder</h2>
                             </div>
                             <div className="acceder-usuario" ref={usuarioContainer}>
-                                <i class="fa-solid fa-circle-user acceder-usuario-icono"></i>
+                                <i className="fa-solid fa-circle-user acceder-usuario-icono"></i>
                                 <input ref={usuario} type='text' className="acceder-usuario-caja" placeholder="Usuario"></input>
                             </div>
                             <div className="acceder-contraseña" ref={contraseñaContainer}>
-                                <i class="fa-solid fa-key acceder-contraseña-icono"></i>
+                                <i className="fa-solid fa-key acceder-contraseña-icono"></i>
                                 <input ref={contraseña} type='password' className="acceder-contraseña-caja" placeholder="Contraseña"></input>
                             </div>
                             {/* <div className="acceder-redes">
-                                <i class="fa-brands fa-facebook acceder-redes-facebook"></i>
-                                <i class="fa-brands fa-google-plus acceder-redes-google"></i>
+                                <i className="fa-brands fa-facebook acceder-redes-facebook"></i>
+                                <i className="fa-brands fa-google-plus acceder-redes-google"></i>
                             </div> */}
                             <div className="acceder-mensaje-error">
                                 <p className="acceder-mensaje-error-texto">{mensajeError}</p>
@@ -155,7 +155,7 @@ function Acceder (props){
                     }
 
                 </form>
-                <i class="fa-solid fa-xmark acceder-cruz" onClick={()=> {
+                <i className="fa-solid fa-xmark acceder-cruz" onClick={()=> {
                                                                     props.cerrarOnCLick()
                                                                     setRecuperarContraseña(false)
                                                                     }}></i>

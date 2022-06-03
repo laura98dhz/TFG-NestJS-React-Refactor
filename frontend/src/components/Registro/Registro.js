@@ -78,14 +78,14 @@ function Registro (props){
                     </div> */}
 
                     {/* <div className="registro-redes">
-                        <i class="fa-brands fa-facebook registro-redes-facebook"></i>
-                        <i class="fa-brands fa-google-plus registro-redes-google"></i>
+                        <i className="fa-brands fa-facebook registro-redes-facebook"></i>
+                        <i className="fa-brands fa-google-plus registro-redes-google"></i>
                     </div> */}
                     
                     <button className="registro-boton" onClick={(e)=>crearUsuario(e)}>Registrarse</button>
 
                 </form>
-                <i class="fa-solid fa-xmark acceder-cruz" onClick={()=> props.cerrarRegistro()}></i>
+                <i className="fa-solid fa-xmark acceder-cruz" onClick={()=> props.cerrarRegistro()}></i>
             </div>
         </section>
         </>

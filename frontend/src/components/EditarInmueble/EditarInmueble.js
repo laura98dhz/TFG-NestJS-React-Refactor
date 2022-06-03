@@ -152,7 +152,7 @@ export default function EditarInmueble(props){
                     <input type="submit" className="Editar-inmueble-boton" value="Guardar"/>
 
                 </form>
-                <i class="fa-solid fa-xmark Editar-inmueble--cruz" onClick={()=>{props.cerrarOnCLick()}}></i>
+                <i className="fa-solid fa-xmark Editar-inmueble--cruz" onClick={()=>{props.cerrarOnCLick()}}></i>
             </div>
         </section>
         </>

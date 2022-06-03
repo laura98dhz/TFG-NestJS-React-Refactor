@@ -53,7 +53,7 @@ function MainPrincipal(props){
                             </div>
                             <input ref={buscar} type='text' className='main-principal-container-buscar-form-text'></input>
                             <button className='main-principal-container-buscar-form-text-boton' onClick={(e)=>buscarInmueble(e, buscar)}>
-                                <i class="fa-solid fa-magnifying-glass main-principal-container-buscar-form-text-boton-icono"></i>
+                                <i className="fa-solid fa-magnifying-glass main-principal-container-buscar-form-text-boton-icono"></i>
                             </button>  
                         </form>
                     </div>
