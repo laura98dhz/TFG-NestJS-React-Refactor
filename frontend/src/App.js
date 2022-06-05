@@ -130,8 +130,8 @@ export default function App() {
     setId(id);
   }
 
-  console.log("app>>>",sessionStorage.getItem('usuario'))
-
+  //console.log("app>>>",sessionStorage.getItem('usuario'))
+  console.log("---",process.env.API_URL)
   return (
     <>
       { cargarHeader ? <Header handleOnClick={mostrarMain} accederOnClick={mostrarAcceder} ajustesOnClick={ajustesUsuario} handleCargarAnuncio={cargarPonerAnuncio}/> : "" }
@@ -142,9 +142,7 @@ export default function App() {
       { cargarFooter ? <Footer/> : "" }
       { cargarRegistro ? <Registro cargarRegistro={cargarRegistroUsuario} cerrarRegistro={mostrarMain}/> : "" }
       { sessionStorage.getItem('usuario') && cargarCrearInmueble ? <CrearInmueble cerrarOnCLick={cerrarAcceder}/> : "" } 
-      { cargarEditarInmueble ? <EditarInmueble id={id} cerrarOnCLick={cerrarEditarInmueble}/> : "" } 
-      <img src="%PUBLIC_URL%upload\\piso2-b8eapiso2.jpg"></img>
-    
+      { cargarEditarInmueble ? <EditarInmueble id={id} cerrarOnCLick={cerrarEditarInmueble}/> : "" }     
     </>
   )
 }

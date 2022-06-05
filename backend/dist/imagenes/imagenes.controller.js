@@ -29,7 +29,7 @@ let ImagenesController = class ImagenesController {
         return await this.imagenesService.getPath(id);
     }
     async getFile(path, res) {
-        return await this.imagenesService.getFile(path, res);
+        console.log(path);
     }
 };
 __decorate([
@@ -55,8 +55,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ImagenesController.prototype, "getPaths", null);
 __decorate([
-    (0, common_1.Post)('/getImage'),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.Get)('/getImage/:path'),
+    __param(0, (0, common_1.Query)('path')),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Headers, Param, Post, Req, Res, StreamableFile, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Headers, Param, Post, Query, Req, Res, StreamableFile, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { fileFilter, renameImage } from './helpers/imagenes.helper';
@@ -25,9 +25,10 @@ export class ImagenesController {
         return await this.imagenesService.getPath(id);
     }
 
-    @Post('/getImage') 
-    async getFile(@Body() path: String, @Res() res): Promise<any> {
-        return await this.imagenesService.getFile(path, res);
+    @Get('/getImage/:path') 
+    async getFile(@Query('path') path: String, @Res() res): Promise<any> {
+        console.log(path)
+        //return await this.imagenesService.getFile(path, res);
     }
 
 }
