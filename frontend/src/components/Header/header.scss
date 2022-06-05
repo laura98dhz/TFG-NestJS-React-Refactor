@@ -1,3 +1,4 @@
+
 .header{
     background-color: rgb(241, 241, 241);
     padding: 1rem;
@@ -6,6 +7,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+
+  
 }
 
 .logo{
@@ -32,6 +35,14 @@
         padding: 1rem;
         cursor: pointer;
         transition: all ease .5s;
+
+        @media(max-width:935px){
+            font-size: 1.5rem;
+        }
+
+        @media(max-width:770px){
+            font-size: 1rem;
+        }
         // & > p{
         //     margin-top: 1rem;
         // }
@@ -93,6 +104,14 @@
             color: rgb(70, 70, 70);
             background-color: white;
             transition: all ease .5s;
+
+            @media(max-width:935px){
+                font-size: 1.5rem;
+            }
+
+            @media(max-width:770px){
+                font-size: 1rem;
+            }
 
             &:hover{
                 background-color: rgb(176, 158, 128);

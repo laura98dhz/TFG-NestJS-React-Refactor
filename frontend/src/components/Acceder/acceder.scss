@@ -14,6 +14,12 @@
         transform: translateY(-50%);
         display: flex;
         justify-content: center;
+        align-items: center;
+
+        @media(max-width:1000px){
+            width: 50%;
+            height: 100vh;
+        }
     }
 
     &-cruz{
@@ -32,6 +38,8 @@
     &-form {
         display: flex;
         flex-direction: column;
+
+        
     }
 
     &-titulo {
@@ -152,5 +160,9 @@
         height: 100vh;
         position: absolute;
         position: fixed;
+
+        @media(max-width:1000px){
+            height: 350vh;
+        }
     }
 }

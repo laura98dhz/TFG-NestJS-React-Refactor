@@ -46,7 +46,7 @@ function Header(props){
                     </div>
                 )}
                 
-                
+{/*                 
                 <div className='idioma'>
                     <select className='idioma-select'>
                         <option>Español</option>
@@ -54,7 +54,7 @@ function Header(props){
                         <option>Catalá</option>
                         <option>Deutsche</option>
                     </select> 
-                </div>
+                </div> */}
                 
             </div>
         </header>
