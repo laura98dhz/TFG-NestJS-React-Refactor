@@ -25,6 +25,9 @@ let MailsController = class MailsController {
     async sendEmailPassword(email, name) {
         return await this.mailsService.sendMailPassword(email, name);
     }
+    async sendEmailForm(name, surname, email, reason, message) {
+        return await this.mailsService.sendMailForm(name, surname, email, reason, message);
+    }
 };
 __decorate([
     (0, common_1.Post)('/welcome'),
@@ -42,6 +45,17 @@ __decorate([
     __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], MailsController.prototype, "sendEmailPassword", null);
+__decorate([
+    (0, common_1.Post)('/form'),
+    __param(0, (0, common_1.Query)('name')),
+    __param(1, (0, common_1.Query)('surname')),
+    __param(2, (0, common_1.Query)('email')),
+    __param(3, (0, common_1.Query)('reason')),
+    __param(4, (0, common_1.Query)('message')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, String, String, String]),
+    __metadata("design:returntype", Promise)
+], MailsController.prototype, "sendEmailForm", null);
 MailsController = __decorate([
     (0, common_1.Controller)('mails'),
     __metadata("design:paramtypes", [mails_service_1.MailsService])

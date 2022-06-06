@@ -32,14 +32,31 @@ let MailsService = class MailsService {
         });
     }
     async sendMailPassword(email, name) {
-        const password = 1;
         await this.mailerService.sendMail({
             to: email,
             subject: 'Recuperar Contraseña Golden Houses',
             template: '/emailContraseña',
             context: {
+                name: name
+            },
+            attachments: [{
+                    filename: 'logo.png',
+                    path: __dirname + '/templates/logo.png',
+                    cid: 'logo'
+                }]
+        });
+    }
+    async sendMailForm(name, surname, email, reason, message) {
+        await this.mailerService.sendMail({
+            to: "gldhouses@gmail.com",
+            subject: 'Formulario de Contacto',
+            template: '/emailForm',
+            context: {
                 name: name,
-                password: password
+                surname: surname,
+                email: email,
+                reason: reason,
+                message: message
             },
             attachments: [{
                     filename: 'logo.png',
