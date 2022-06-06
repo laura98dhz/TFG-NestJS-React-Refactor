@@ -128,7 +128,7 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getFile(path, res)</code>
+                    <code>getFile(path: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank">String</a>, res)</code>
                 </td>
             </tr>
 
@@ -136,7 +136,7 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;/getImage&#x27;)<br /></code>
+                    <code>@Get(&#x27;/getImage/:path&#x27;)<br /></code>
                 </td>
             </tr>
 
@@ -158,12 +158,16 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>path</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" >String</a></code>
+                                    </td>
 
                                     <td>
                                         No
@@ -173,6 +177,8 @@
                                 </tr>
                                 <tr>
                                     <td>res</td>
+                                    <td>
+                                    </td>
 
                                     <td>
                                         No
@@ -368,7 +374,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Get, Headers, Param, Post, Req, Res, StreamableFile, UploadedFile, UploadedFiles, UseInterceptors } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Get, Headers, Param, Post, Query, Req, Res, StreamableFile, UploadedFile, UploadedFiles, UseInterceptors } from &#x27;@nestjs/common&#x27;;
 import { FileInterceptor, FilesInterceptor } from &#x27;@nestjs/platform-express&#x27;;
 import { diskStorage } from &#x27;multer&#x27;;
 import { fileFilter, renameImage } from &#x27;./helpers/imagenes.helper&#x27;;
@@ -395,9 +401,10 @@ export class ImagenesController {
         return await this.imagenesService.getPath(id);
     }
 
-    @Get(&#x27;/getImage&#x27;) 
-    async getFile(@Body() path, @Res() res): Promise&lt;any&gt; {
-        return await this.imagenesService.getFile(path, res);
+    @Get(&#x27;/getImage/:path&#x27;) 
+    async getFile(@Query(&#x27;path&#x27;) path: String, @Res() res): Promise&lt;any&gt; {
+        console.log(path)
+        //return await this.imagenesService.getFile(path, res);
     }
 
 }
