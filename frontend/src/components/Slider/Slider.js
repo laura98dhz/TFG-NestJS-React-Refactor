@@ -29,7 +29,7 @@ export default function Sliders(props) {
                     {
                         rutas.map(function () {
                             return (
-                                <div className="slider--container">
+                                <div className="slider--container" key={path}>
                                     <img className="img" src={"http://localhost/xampp/TFG-NestJS-React-Refactor/backend/" + path}></img>
                                 </div>
                             )

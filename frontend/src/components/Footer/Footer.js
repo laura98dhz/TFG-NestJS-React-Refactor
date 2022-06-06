@@ -1,14 +1,35 @@
 function Footer(){
+    
+    function formulario(e){
+        e.nativeEvent.preventDefault();
+
+        fetch("http://localhost:8080/mails/form", { 
+                'method': 'POST',
+                'headers': { 'Content-Type': 'application/json' },  
+                'body': JSON.stringify({
+                    'name': e.target.nombre.value,
+                    'surname': e.target.apellidos.value,
+                    'email': e.target.email.value,
+                    'reason': e.target.motivo.value,
+                    'message': e.target.mensaje.value
+
+                })   
+            })
+
+        console.log(e.target.mensaje.value)
+    }
+    
+    
     return(
         <footer className="footer">
             <div className="footer-container">
                 <h2 className="footer-titulo">Contáctenos</h2>
-                <form className="footer-form">
-                    <input type='text' placeholder="Nombre"></input>
-                    <input type='text' placeholder="Apellidos"></input>
-                    <input type='email' placeholder="Email"></input>
-                    <input type='text' placeholder="Motivo"></input>
-                    <input type='text' placeholder="Escriba su mensaje"></input>
+                <form className="footer-form" onSubmit={(e)=>formulario(e)}>
+                    <input type='text' name="nombre" placeholder="Nombre"></input>
+                    <input type='text' name="apellidos" placeholder="Apellidos"></input>
+                    <input type='email' name="email" placeholder="Email"></input>
+                    <input type='text' name="motivo" placeholder="Motivo"></input>
+                    <input type='text' name="mensaje" placeholder="Escriba su mensaje"></input>
                     <button>Enviar</button>
                 </form>
             </div> 
