@@ -59,9 +59,9 @@ function MainPrincipal(props){
                     </div>
                 </div>
             </section>
-            <section className='calculadoraHipoteca'>
+            {/* <section className='calculadoraHipoteca'>
                 <CalculadoraHipoteca/>
-            </section>
+            </section> */}
         </main>
     )
 }

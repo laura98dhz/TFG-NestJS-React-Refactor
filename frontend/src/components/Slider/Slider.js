@@ -27,16 +27,16 @@ export default function Sliders(props) {
             { rutas.length !==0 ? (
                 <Slider dots>
                     {
-                        rutas.map(function () {
+                        rutas.map(function (ruta) {
                             return (
-                                <div className="slider--container" key={path}>
-                                    <img className="img" src={"http://localhost/xampp/TFG-NestJS-React-Refactor/backend/" + path}></img>
+                                <div className="slider--container" key={ruta.path}>
+                                    <img className="img" src={"http://localhost/xampp/TFG-NestJS-React-Refactor/backend/" + ruta.path}></img>
                                 </div>
                             )
                         })
                     }
                 </Slider>
-            ) : "" }
+            ) : ""}
 
         </section>
     );

@@ -13,9 +13,11 @@ exports.MailsService = void 0;
 const mailer_1 = require("@nestjs-modules/mailer");
 const common_1 = require("@nestjs/common");
 let MailsService = class MailsService {
+    
     constructor(mailerService) {
         this.mailerService = mailerService;
     }
+    
     async sendMailWelcome(email, name) {
         await this.mailerService.sendMail({
             to: email,
