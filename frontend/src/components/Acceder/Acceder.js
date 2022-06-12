@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 
 function Acceder (props){
@@ -37,6 +37,11 @@ function Acceder (props){
             return result.json();
         }).then( usuario => {
             setNombreUsuario(usuario);
+            if(usuario.message !== undefined){
+                setMensajeError("Usuario No Encontrado");
+            }else{
+                setMensajeError("");
+            }
         })
 
         if(nombreUsuario.message===undefined){
@@ -51,6 +56,11 @@ function Acceder (props){
                 return result.json();
             }).then( usuario => {
                 setBuscarUsuario(usuario);
+                if(usuario){
+                    setMensajeError("");
+                }else{
+                    setMensajeError("Contraseña Incorrecta");
+                }
             })
     }
     }
@@ -60,8 +70,6 @@ function Acceder (props){
         sessionStorage.setItem('usuario', nombreUsuario.nombreUsuario)
         sessionStorage.setItem('correo', nombreUsuario.correo)
     }
-
-    console.log("acceder>>>",sessionStorage.getItem('usuario'))
 
     function registrarUsuario(){
         props.crearUsuarioOnClick();
