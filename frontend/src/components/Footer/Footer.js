@@ -3,20 +3,11 @@ function Footer(){
     function formulario(e){
         e.nativeEvent.preventDefault();
 
-        fetch("http://localhost:8080/mails/form", { 
+        fetch("http://localhost:8080/mails/form?name=" + e.target.nombre.value + "&surname=" + e.target.apellidos.value + "&email=" + e.target.email.value + "&reason=" + e.target.motivo.value + "&message=" + e.target.mensaje.value, { 
                 'method': 'POST',
-                'headers': { 'Content-Type': 'application/json' },  
-                'body': JSON.stringify({
-                    'name': e.target.nombre.value,
-                    'surname': e.target.apellidos.value,
-                    'email': e.target.email.value,
-                    'reason': e.target.motivo.value,
-                    'message': e.target.mensaje.value
+                'headers': { 'Content-Type': 'application/json' }           
+        })
 
-                })   
-            })
-
-        console.log(e.target.mensaje.value)
     }
     
     

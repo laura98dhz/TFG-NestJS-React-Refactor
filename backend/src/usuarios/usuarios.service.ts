@@ -82,6 +82,7 @@ export class UsuariosService {
     }
 
     async update(nombreUsuario: string, data: UpdateUsuarioDto): Promise<any>{
+                
         const usuario = await this.usuarioRepository.findOne({
             where:{
                 nombreUsuario: nombreUsuario
@@ -89,11 +90,11 @@ export class UsuariosService {
         });
         if(!usuario) throw new BadRequestException({message: 'Ese nombre de usuario ya existe'})
         
-        if(data.nombreUsuario) {
+        if(data.nombreUsuario && data.nombreUsuario !== '') {
             usuario.nombreUsuario = data.nombreUsuario;        
         }
 
-        if(data.contraseña) {
+        if(data.contraseña && data.contraseña !== '') {
             const contraseñaHash = await bcrypt.hash(data.contraseña, 10);
             
             data.contraseña = contraseñaHash;
@@ -101,9 +102,11 @@ export class UsuariosService {
             usuario.contraseña = data.contraseña;        
         }
 
-        if(data.correo) {
+        if(data.correo && data.correo !== '') {
+
             usuario.correo = data.correo;        
         }
+
         await this.usuarioRepository.update({
             nombreUsuario: nombreUsuario
         },{
@@ -111,8 +114,8 @@ export class UsuariosService {
             contraseña: usuario.contraseña,
             correo: usuario.correo
         })
-
-        return {message: 'usuario modificado'};
+      
+        return usuario;
     }
 
     async delete(nombreUsuario: string){

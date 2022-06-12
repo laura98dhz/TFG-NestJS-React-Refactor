@@ -84,15 +84,15 @@ let UsuariosService = class UsuariosService {
         });
         if (!usuario)
             throw new common_1.BadRequestException({ message: 'Ese nombre de usuario ya existe' });
-        if (data.nombreUsuario) {
+        if (data.nombreUsuario && data.nombreUsuario !== '') {
             usuario.nombreUsuario = data.nombreUsuario;
         }
-        if (data.contraseña) {
+        if (data.contraseña && data.contraseña !== '') {
             const contraseñaHash = await bcrypt.hash(data.contraseña, 10);
             data.contraseña = contraseñaHash;
             usuario.contraseña = data.contraseña;
         }
-        if (data.correo) {
+        if (data.correo && data.correo !== '') {
             usuario.correo = data.correo;
         }
         await this.usuarioRepository.update({
@@ -102,7 +102,7 @@ let UsuariosService = class UsuariosService {
             contraseña: usuario.contraseña,
             correo: usuario.correo
         });
-        return { message: 'usuario modificado' };
+        return usuario;
     }
     async delete(nombreUsuario) {
         const usuario = await this.findByNombre(nombreUsuario);

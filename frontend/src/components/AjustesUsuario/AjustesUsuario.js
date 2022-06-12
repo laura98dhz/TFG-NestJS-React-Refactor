@@ -66,8 +66,7 @@ export default function AjustesUsuario(props){
         props.cerrarAjustes();
     }
 
-    function actualizarDatos(e){
-        e.nativeEvent.preventDefault();
+    useEffect(()=>{
         fetch("http://localhost:8080/usuarios/"+ sessionStorage.getItem('usuario'), { 
             'method': 'GET',
             'headers': { 'Content-Type': 'application/json' },    
@@ -79,14 +78,19 @@ export default function AjustesUsuario(props){
             setUsuarios(datos)
         })
         .catch(err => console.log('Solicitud fallida', err));
+    },[])
 
+    function actualizarDatos(e){
+        e.nativeEvent.preventDefault();
+        
         if(usuario.current.value === ""){
             usuario.current.value = usuarios.nombreUsuario;
         }
+
         if(correo.current.value === ""){
-            console.log(usuarios.correo)
             correo.current.value = usuarios.correo;
         }
+
         if(contraseña.current.value === ""){
             contraseña.current.value = usuarios.contraseña;
         }
@@ -100,12 +104,14 @@ export default function AjustesUsuario(props){
                 'correo': correo.current.value
             })
         })
-        .then(() => {
-            sessionStorage.setItem("usuario",usuario.current.value);
-            sessionStorage.setItem("correo",correo.current.value);
-
+        .then(result => {
+            return result.json();
+            
         })
-        .catch(setMensajeError("Ese usuario ya existe"));
+        .then(result => {
+            sessionStorage.setItem("usuario", result.nombreUsuario);
+            sessionStorage.setItem("correo", result.correo);
+        });
     }
 
     function borrar(id){
@@ -126,6 +132,7 @@ export default function AjustesUsuario(props){
         props.handleEditar(id);
     }
 
+    console.log(inmuebles[1])
     return(
 
         <section className="ajustesUsuario--container">
