@@ -27,7 +27,8 @@ let ImagenesService = class ImagenesService {
         this.inmuebleRepository = inmuebleRepository;
     }
     async uploadFiles(id, files) {
-        const inmueble = this.inmuebleRepository.findOne({
+        console.log(1);
+        const inmueble = await this.inmuebleRepository.findOne({
             where: {
                 id: id
             }

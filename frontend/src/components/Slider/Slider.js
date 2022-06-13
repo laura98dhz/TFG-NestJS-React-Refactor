@@ -22,12 +22,15 @@ export default function Sliders(props) {
 
     },[])
 
+
     return (
         <section className="slider">
             { rutas.length !==0 ? (
                 <Slider dots>
                     {
                         rutas.map(function (ruta) {
+                            console.log(ruta.path);
+
                             return (
                                 <div className="slider--container" key={ruta.path}>
                                     <img className="img" src={"http://localhost/xampp/TFG-NestJS-React-Refactor/backend/" + ruta.path}></img>

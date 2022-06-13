@@ -26,6 +26,8 @@ export default function CrearInmueble(props){
         .then((result)=>{
             return result.json();
         }).then(datos=>{
+            
+            console.log(datos.id)
 
             var f = new FormData();
             for(let i = 0; i < archivos.length; i ++){

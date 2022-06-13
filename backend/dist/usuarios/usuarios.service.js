@@ -82,7 +82,6 @@ let UsuariosService = class UsuariosService {
                 nombreUsuario: nombreUsuario
             }
         });
-        console.log(usuario);
         if (!usuario)
             throw new common_1.BadRequestException({ message: 'Ese nombre de usuario ya existe' });
         if (data.nombreUsuario && data.nombreUsuario !== '') {
@@ -106,7 +105,6 @@ let UsuariosService = class UsuariosService {
             contraseña: usuario.contraseña,
             correo: usuario.correo
         });
-        console.log(data, "------", usuario);
         return usuario;
     }
     async delete(nombreUsuario) {

@@ -89,9 +89,6 @@ export class UsuariosService {
             }
         });
         
-        console.log(usuario)
-
-        
         if(!usuario) throw new BadRequestException({message: 'Ese nombre de usuario ya existe'})
         
         if(data.nombreUsuario && data.nombreUsuario !== '') {
@@ -123,7 +120,6 @@ export class UsuariosService {
             contraseña: usuario.contraseña,
             correo: usuario.correo
         })
-        console.log(data, "------", usuario)
       
         return usuario;
     }

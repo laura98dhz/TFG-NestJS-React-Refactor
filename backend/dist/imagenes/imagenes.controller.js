@@ -30,6 +30,7 @@ let ImagenesController = class ImagenesController {
     }
     async getFile(path, res) {
         console.log(path);
+        return await this.imagenesService.getFile(path, res);
     }
 };
 __decorate([
