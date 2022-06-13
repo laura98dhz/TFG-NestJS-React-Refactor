@@ -18,9 +18,7 @@ export class ImagenesService {
     ) { }
 
     async uploadFiles(id: number, files: Array<Express.Multer.File>){
-        
-        console.log(1)
-        
+                
         const inmueble = await this.inmuebleRepository.findOne({
             where:{
                 id: id
