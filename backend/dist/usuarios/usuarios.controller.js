@@ -34,7 +34,6 @@ let UsuariosController = class UsuariosController {
         return this.usuariosService.findByEmail(correo.correo);
     }
     create(data) {
-        console.log("asdfgh");
         return this.usuariosService.create(data);
     }
     update(nombreUsuario, data) {

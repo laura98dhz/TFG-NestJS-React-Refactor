@@ -37,7 +37,6 @@ export class UsuariosController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   create(@Body() data: CreateUsuarioDto) {
-    console.log("asdfgh")
     return this.usuariosService.create(data);
   }
 

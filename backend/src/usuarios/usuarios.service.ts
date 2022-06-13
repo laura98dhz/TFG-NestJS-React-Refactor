@@ -82,19 +82,28 @@ export class UsuariosService {
     }
 
     async update(nombreUsuario: string, data: UpdateUsuarioDto): Promise<any>{
-                
+
         const usuario = await this.usuarioRepository.findOne({
             where:{
                 nombreUsuario: nombreUsuario
             }
         });
+        
+        console.log(usuario)
+
+        
         if(!usuario) throw new BadRequestException({message: 'Ese nombre de usuario ya existe'})
         
         if(data.nombreUsuario && data.nombreUsuario !== '') {
             usuario.nombreUsuario = data.nombreUsuario;        
         }
+        
+        if(data.contraseña === usuario.contraseña){
+            
+            usuario.contraseña = data.contraseña;
 
-        if(data.contraseña && data.contraseña !== '') {
+        }else{
+
             const contraseñaHash = await bcrypt.hash(data.contraseña, 10);
             
             data.contraseña = contraseñaHash;
@@ -114,6 +123,7 @@ export class UsuariosService {
             contraseña: usuario.contraseña,
             correo: usuario.correo
         })
+        console.log(data, "------", usuario)
       
         return usuario;
     }

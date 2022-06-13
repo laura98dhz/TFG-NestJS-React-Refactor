@@ -47,6 +47,7 @@ export default function AjustesUsuario(props){
     
     },[skip])
 
+    console.log(usuarios)
 
     function previousPage(e){
         e.nativeEvent.preventDefault();
@@ -92,6 +93,7 @@ export default function AjustesUsuario(props){
         }
 
         if(contraseña.current.value === ""){
+            console.log("contr", contraseña.current.value)
             contraseña.current.value = usuarios.contraseña;
         }
 
@@ -108,10 +110,12 @@ export default function AjustesUsuario(props){
             return result.json();
             
         })
-        .then(result => {
-            sessionStorage.setItem("usuario", result.nombreUsuario);
-            sessionStorage.setItem("correo", result.correo);
-        });
+        .then((result) => console.log(result))
+        .catch((err)=>console.log(err))
+        // .then(result => {
+        //     sessionStorage.setItem("usuario", result.nombreUsuario);
+        //     sessionStorage.setItem("correo", result.correo);
+        // });
     }
 
     function borrar(id){
