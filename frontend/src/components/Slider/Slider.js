@@ -29,7 +29,6 @@ export default function Sliders(props) {
                 <Slider dots>
                     {
                         rutas.map(function (ruta) {
-                            console.log(ruta.path);
 
                             return (
                                 <div className="slider--container" key={ruta.path}>

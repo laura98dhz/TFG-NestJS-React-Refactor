@@ -29,7 +29,6 @@ let ImagenesController = class ImagenesController {
         return await this.imagenesService.getPath(id);
     }
     async getFile(path, res) {
-        console.log(path);
         return await this.imagenesService.getFile(path, res);
     }
 };

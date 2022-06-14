@@ -71,6 +71,8 @@ export default function EditarInmueble(props){
                 })
             })
             .catch(err => console.log('Solicitud fallida', err));
+            
+            props.cerrarOnCLick();
         
     }
 
