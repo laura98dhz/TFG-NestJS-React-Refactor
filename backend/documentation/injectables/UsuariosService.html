@@ -337,8 +337,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="118"
-                            class="link-to-prism">src/usuarios/usuarios.service.ts:118</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="127"
+                            class="link-to-prism">src/usuarios/usuarios.service.ts:127</a></div>
                 </td>
             </tr>
 
@@ -740,18 +740,25 @@ export class UsuariosService {
     }
 
     async update(nombreUsuario: string, data: UpdateUsuarioDto): Promise&lt;any&gt;{
+
         const usuario &#x3D; await this.usuarioRepository.findOne({
             where:{
                 nombreUsuario: nombreUsuario
             }
         });
+        
         if(!usuario) throw new BadRequestException({message: &#x27;Ese nombre de usuario ya existe&#x27;})
         
-        if(data.nombreUsuario) {
+        if(data.nombreUsuario &amp;&amp; data.nombreUsuario !&#x3D;&#x3D; &#x27;&#x27;) {
             usuario.nombreUsuario &#x3D; data.nombreUsuario;        
         }
+        
+        if(data.contraseña &#x3D;&#x3D;&#x3D; usuario.contraseña){
+            
+            usuario.contraseña &#x3D; data.contraseña;
 
-        if(data.contraseña) {
+        }else{
+
             const contraseñaHash &#x3D; await bcrypt.hash(data.contraseña, 10);
             
             data.contraseña &#x3D; contraseñaHash;
@@ -759,9 +766,11 @@ export class UsuariosService {
             usuario.contraseña &#x3D; data.contraseña;        
         }
 
-        if(data.correo) {
+        if(data.correo &amp;&amp; data.correo !&#x3D;&#x3D; &#x27;&#x27;) {
+
             usuario.correo &#x3D; data.correo;        
         }
+
         await this.usuarioRepository.update({
             nombreUsuario: nombreUsuario
         },{
@@ -769,8 +778,8 @@ export class UsuariosService {
             contraseña: usuario.contraseña,
             correo: usuario.correo
         })
-
-        return {message: &#x27;usuario modificado&#x27;};
+      
+        return usuario;
     }
 
     async delete(nombreUsuario: string){

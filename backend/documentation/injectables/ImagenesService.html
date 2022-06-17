@@ -426,14 +426,14 @@ export class ImagenesService {
 
     async uploadFiles(id: number, files: Array&lt;Express.Multer.File&gt;){
                 
-        const inmueble &#x3D; this.inmuebleRepository.findOne({
+        const inmueble &#x3D; await this.inmuebleRepository.findOne({
             where:{
                 id: id
             }
         })
         if(!inmueble) throw new BadRequestException({message: &#x27;Ese inmueble no existe&#x27;}) 
-            
-            for( var file of files){
+        
+        for( var file of files){
             const filename &#x3D; file.filename;
             const path &#x3D; file.path;
             

@@ -142,8 +142,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">src/imagenes/imagenes.controller.ts:29</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="30"
+                            class="link-to-prism">src/imagenes/imagenes.controller.ts:30</a></div>
                 </td>
             </tr>
 
@@ -231,8 +231,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/imagenes/imagenes.controller.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/imagenes/imagenes.controller.ts:25</a></div>
                 </td>
             </tr>
 
@@ -309,8 +309,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/imagenes/imagenes.controller.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="20"
+                            class="link-to-prism">src/imagenes/imagenes.controller.ts:20</a></div>
                 </td>
             </tr>
 
@@ -374,9 +374,10 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Get, Headers, Param, Post, Query, Req, Res, StreamableFile, UploadedFile, UploadedFiles, UseInterceptors } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Delete, Get, Headers, Param, Post, Query, Req, Res, StreamableFile, UploadedFile, UploadedFiles, UseInterceptors } from &#x27;@nestjs/common&#x27;;
 import { FileInterceptor, FilesInterceptor } from &#x27;@nestjs/platform-express&#x27;;
 import { diskStorage } from &#x27;multer&#x27;;
+import path from &#x27;path&#x27;;
 import { fileFilter, renameImage } from &#x27;./helpers/imagenes.helper&#x27;;
 import { ImagenesService } from &#x27;./imagenes.service&#x27;;
 
@@ -403,12 +404,10 @@ export class ImagenesController {
 
     @Get(&#x27;/getImage/:path&#x27;) 
     async getFile(@Query(&#x27;path&#x27;) path: String, @Res() res): Promise&lt;any&gt; {
-        console.log(path)
-        //return await this.imagenesService.getFile(path, res);
+        return await this.imagenesService.getFile(path, res);
     }
 
-}
-</code></pre>
+}</code></pre>
     </div>
 </div>
 
